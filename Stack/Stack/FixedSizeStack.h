@@ -17,9 +17,10 @@ public:
 	bool Push(double element);
 	bool Pop(double& element);
 	double Peek() const;
+	void RemoveAll();
 
 	size_t GetAllocatedSize() const;
-	size_t GetUsedSize() const;
+	size_t GetSize() const;
 	bool IsEmpty() const;
 
 private:

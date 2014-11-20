@@ -72,6 +72,7 @@ void Registrator::RunTests()
 	}
 }
 
+#include <list>
 
 ///
 /// Функцията main() е "скрита" в рамката за тестове

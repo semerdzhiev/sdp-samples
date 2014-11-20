@@ -82,6 +82,9 @@ void FixedSizeStack::Destroy()
 ///
 void FixedSizeStack::CopyFrom(FixedSizeStack const& Other)
 {
+	if (Other.IsEmpty())
+		return;
+
 	pData = new double[Other.Allocated];
 	Allocated = Other.Allocated;
 	Used = Other.Used;
@@ -149,6 +152,18 @@ double FixedSizeStack::Peek() const
 
 
 ///
+/// Премахва всички елементи от стека.
+///
+/// Функцията не изчиства паметта заета от стека,
+/// а само премахва елементите от него.
+///
+void FixedSizeStack::RemoveAll()
+{
+	Used = 0;
+}
+
+
+///
 /// Връща максималната вместимост на стека в брой елементи
 ///
 size_t FixedSizeStack::GetAllocatedSize() const
@@ -160,7 +175,7 @@ size_t FixedSizeStack::GetAllocatedSize() const
 ///
 /// Връща броя на съхранените в стека елементи
 ///
-size_t FixedSizeStack::GetUsedSize() const
+size_t FixedSizeStack::GetSize() const
 {
 	return Used;
 }
