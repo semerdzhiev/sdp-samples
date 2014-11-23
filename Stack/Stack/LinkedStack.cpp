@@ -1,5 +1,5 @@
 #include <assert.h>
-#include <new> // Заради std::bad_alloc
+#include <exception>
 #include "LinkedStack.h"
 
 
@@ -190,7 +190,13 @@ bool LinkedStack::Pop(double& element)
 		return false;
 
 	element = pTop->Data;
+
+	Box* pOld = pTop;
+	pTop = pTop->pNext;
+	delete pOld;
+	
 	Used--;
+
 	return true;
 }
 
@@ -246,5 +252,5 @@ size_t LinkedStack::GetSize() const
 ///
 bool LinkedStack::IsEmpty() const
 {
-	return Used != 0;
+	return Used == 0;
 }

@@ -77,11 +77,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Stack\FixedSizeStack.cpp" />
+    <ClCompile Include="..\Stack\LinkedStack.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="UnitTestFramework.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Stack\FixedSizeStack.h" />
+    <ClInclude Include="..\Stack\LinkedStack.h" />
     <ClInclude Include="UnitTestFramework.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

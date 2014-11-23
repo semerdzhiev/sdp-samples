@@ -1,7 +1,6 @@
 ﻿#include <assert.h>
 #include "FixedSizeStack.h"
 
-
 ///
 /// Конструктор по подразбиране
 ///
@@ -145,7 +144,7 @@ bool FixedSizeStack::Pop(double& element)
 ///
 double FixedSizeStack::Peek() const
 {
-	assert(Used != 0);
+	assert( ! IsEmpty() );
 
 	return pData[Used - 1];
 }
@@ -186,5 +185,5 @@ size_t FixedSizeStack::GetSize() const
 ///
 bool FixedSizeStack::IsEmpty() const
 {
-	return Used != 0;
+	return Used == 0;
 }
