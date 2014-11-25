@@ -23,6 +23,8 @@ Registrator::Registrator(PTESTFN fn)
 /// да имаме проблем при унищожаването на статичните данни, а само
 /// при тяхната инициализация:
 /// http://www.parashift.com/c++-faq/construct-on-first-use-v2.html
+/// Допълнителна информация има и тук:
+/// http://blogs.msdn.com/b/oldnewthing/archive/2004/03/08/85901.aspx
 ///
 std::vector<PTESTFN>& Registrator::GetRegisteredFunctions()
 {
