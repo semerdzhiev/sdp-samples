@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sorting", "Sorting\Sorting.vcxproj", "{AE7698DA-F2B0-4A22-8581-7D56A9C40CE4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SortingTest", "SortingTest\SortingTest.vcxproj", "{A784BDA9-15A3-476F-8B2C-0833939B45C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,6 +17,10 @@ Global
 		{AE7698DA-F2B0-4A22-8581-7D56A9C40CE4}.Debug|Win32.Build.0 = Debug|Win32
 		{AE7698DA-F2B0-4A22-8581-7D56A9C40CE4}.Release|Win32.ActiveCfg = Release|Win32
 		{AE7698DA-F2B0-4A22-8581-7D56A9C40CE4}.Release|Win32.Build.0 = Release|Win32
+		{A784BDA9-15A3-476F-8B2C-0833939B45C4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A784BDA9-15A3-476F-8B2C-0833939B45C4}.Debug|Win32.Build.0 = Debug|Win32
+		{A784BDA9-15A3-476F-8B2C-0833939B45C4}.Release|Win32.ActiveCfg = Release|Win32
+		{A784BDA9-15A3-476F-8B2C-0833939B45C4}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

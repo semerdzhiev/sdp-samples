@@ -23,6 +23,9 @@ void swapif(T& a, T& b)
 template <class T>
 void SelectionSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	for(size_t i = 0; i < Size-1; i++)
 	{
 		size_t min = i;
@@ -44,6 +47,9 @@ void SelectionSort(T* pArr, size_t Size)
 template <class T>
 void BubbleSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	for(size_t i = 0; i < Size-1; i++)
 	{
 		for(size_t j = Size-1; j > i; j--)
@@ -60,6 +66,9 @@ void BubbleSort(T* pArr, size_t Size)
 template <class T>
 void ShakerSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	size_t left = 0;
 	size_t right = Size-1;
 
@@ -92,12 +101,16 @@ int key(T& value)
 
 ///
 /// Броене на честоти за масив с елементи, които са сводими то int.
+///
 /// Предполага се, че когато преобразуваме елемент до int,
 /// се получава стойност, която е естествено число - неговият ключ.
 ///
 template <class T>
 void DistributionCounting(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	// Намираме най-големия ключ в масива
 	int maxN = 0;
 
@@ -157,8 +170,16 @@ void DistributionCounting(T* pArr, size_t Size)
 ///
 /// Броене на честоти за масив с елементи – естествени числа
 ///
+/// Тази разчита на това, че числата в масива са обекти без идентичност.
+/// В случая това означава, че след като бъде направено преброяване,
+/// данните в оригиналния масив вече не са необходими и функцията може
+/// сама да генерира нужните данни в резултата.
+///
 template <> void DistributionCounting<int>(int* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	// Намираме най-голямото число в масива
 	int maxN = 0;
 
@@ -204,6 +225,9 @@ template <> void DistributionCounting<int>(int* pArr, size_t Size)
 template <class T>
 void InsertionSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	// Преместваме минималният елемент най-отпред
 	for(size_t i = Size-1; i > 0; i--)
 	{
@@ -281,6 +305,9 @@ void ShellSortH(T* pArr, size_t Size, size_t k, size_t h)
 template <class T>
 void ShellSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	size_t h = 1;
 
 	// determine the steps to be used for sorting
@@ -302,7 +329,7 @@ void ShellSort(T* pArr, size_t Size)
 template <class T>
 void QuickSort(T* pArr, size_t Size)
 {
-	if(Size <= 1)
+	if(Size <= 1 || !pArr)
 		return;
 
 	size_t pos = Partition(pArr, Size);
@@ -367,6 +394,9 @@ size_t Partition(T* pArr, size_t Size)
 template <class T>
 void HeapSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	size_t i = Size / 2;
 
 	while(i--)
@@ -427,6 +457,9 @@ void Sift(T* pArr, size_t pos, size_t Size)
 template <class T>
 void MergeSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	T* pBuffer = new T[Size];
 
 	MergeSortStep(pArr, Size, pBuffer);
@@ -484,6 +517,9 @@ void Merge(T* pA, size_t sizeA, T* pB, size_t sizeB, T* pResult)
 template <class T>
 void BottomUpMergeSort(T* pArr, size_t Size)
 {
+	if (!pArr || Size == 0)
+		return;
+
 	T* pBuffer = new T[Size];
 
 	// За да избегнем ненужните копирания, ще използваме два
@@ -540,94 +576,23 @@ void BottomUpMergeSort(T* pArr, size_t Size)
 }
 
 
-///
-/// Показва съдържанието на pArr
-///
-template <class SAMPLE_TYPE>
-void PrintArray(const SAMPLE_TYPE* pArr, size_t Size)
-{
-	if(Size == 0)
-	{
-		std::cout << "(empty)\n";
-	}
-	else
-	{
-		std::cout << pArr[0];
-
-		for(size_t i = 1; i < Size; i++)
-		{
-			std::cout << ", " << pArr[i];
-		}
-	}
-}
-
-
-///
-/// Тества поведението на една сортираща функция
-///
-/// \param [in] pfnSort
-///     Указател към функцията, която ще се тества
-///
-/// \param [in] Name
-///     Името на функцията, която ще се тества
-///     Това е просто текст, който ще се изведе на екрана,
-///		за да се знае какво се обработва в момента и няма отношение
-///		към работата на функцията.
-///
-template <class SAMPLE_TYPE>
-void TestSortingFunction(void pfnSort(SAMPLE_TYPE*, size_t), const char* Name)
-{
-	SAMPLE_TYPE DataSamples[][10] = {
-		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
-		{9, 8, 7, 6, 5, 4, 3, 2, 1, 0},
-		{1, 0, 3, 2, 5, 4, 7, 6, 9, 8},
-		{1, 9, 6, 7, 1, 3, 2, 1, 5, 0},
-		{1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-		{1, 2, 1, 2, 1, 2, 1, 2, 1, 2}
-	};
-
-	const int SampleSize = 10;
-	const int SamplesCount = 6;
-
-	// Извеждаме информация за тестовете
-	std::cout << "Testing " << Name;
-	std::cout << "\n    Samples: " << SamplesCount;
-	std::cout << "\n    Sample size: " << SampleSize;
-	std::cout << "\n    Samples:";
-
-	for(int i = 0; i < SamplesCount; i++)
-	{
-		std::cout << "\n        Sample " << i << ": ";
-		PrintArray<SAMPLE_TYPE>(DataSamples[i], SampleSize);
-	}
-
-	// Изпълняваме тестовете
-	std::cout << "\n\n    Sorting results:";
-	
-	for(int i = 0; i < SamplesCount; i++)
-	{
-		pfnSort(DataSamples[i], SampleSize);
-		std::cout << "\n        Sorted " << i << ": ";
-		PrintArray(DataSamples[i], SampleSize);
-	}
-
-	std::cout << "\n    [end]\n\n\n";
-}
-
-
-#define TEST(x, SAMPLE_TYPE) TestSortingFunction<SAMPLE_TYPE>(x, #x)
-
-int main()
-{
-	TEST(SelectionSort, double);
-	TEST(BubbleSort, double);
-	TEST(ShakerSort, double);
-	TEST(DistributionCounting, int);
-	TEST(DistributionCounting, double);
-	TEST(InsertionSort, double);
-	TEST(ShellSort, double);
-	TEST(QuickSort, double);
-	TEST(HeapSort, double);
-	TEST(MergeSort, double);
-	TEST(BottomUpMergeSort, double);
-}
+//
+// Инстанцираме шаблоните за работа с double
+//
+template void swapif<double>(double& a, double& b);
+template void SelectionSort<double>(double* pArr, size_t Size);
+template void BubbleSort<double>(double* pArr, size_t Size);
+template void ShakerSort<double>(double* pArr, size_t Size);
+template int key<double>(double& value);
+template void DistributionCounting<double>(double* pArr, size_t Size);
+template void InsertionSort<double>(double* pArr, size_t Size);
+template void ShellSortH<double>(double* pArr, size_t Size, size_t k, size_t h);
+template void ShellSort<double>(double* pArr, size_t Size);
+template void QuickSort<double>(double* pArr, size_t Size);
+template size_t Partition<double>(double* pArr, size_t Size);
+template void HeapSort<double>(double* pArr, size_t Size);
+template void Sift<double>(double* pArr, size_t pos, size_t Size);
+template void MergeSort<double>(double* pArr, size_t Size);
+template void MergeSortStep<double>(double* pArr, size_t Size, double* pBuffer);
+template void Merge<double>(double* pA, size_t sizeA, double* pB, size_t sizeB, double* pResult);
+template void BottomUpMergeSort<double>(double* pArr, size_t Size);
