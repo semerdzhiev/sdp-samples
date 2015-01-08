@@ -115,7 +115,6 @@ Cell** Board::DuplicateBoard(const Cell** ppBoard, int RowsCount, int ColsCount)
 			for(int col = 0; col < ColsCount; col++)
 			{
 				ppNewBoard[row][col] = ppBoard[row][col];
-				ppNewBoard[row][col].SetBoard(this);
 			}
 		}
 	}
@@ -282,6 +281,9 @@ bool Board::LoadFromFile(const char* Filename)
 
 	ReadBoardFromFile(InputFile, ppNewBoard);
 
+	// Free the old contents of the board (if any)
+	FreeBoard(ppBoard, RowsCount);
+
 	ppBoard = ppNewBoard;
 	RowsCount = Rows;
 	ColsCount = Cols;
@@ -359,34 +361,6 @@ bool Board::GetBoardDimensionsFromFile(std::ifstream & InputFile, int& RowsCount
 	ColsCount = cols;
 
 	return true;
-	/*
-	while(InputFile.get(c))
-	{
-		if(c == '\n')
-		{
-			if(rows == 0)
-			{
-				cols = counter;
-			}
-			else if(cols != counter)
-			{
-				return false;
-			}
-
-			rows++;
-			counter = 0;
-		}
-		else
-		{
-			counter++;
-		}
-	}
-
-	RowsCount = rows;
-	ColsCount = cols;
-
-	return true;
-	*/
 }
 
 

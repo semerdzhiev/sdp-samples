@@ -8,10 +8,8 @@
 
 class BfsSolver : public Solver
 {
-public:
-	virtual bool PathExists_Internal(Board& board, Cell* pStart);
-
 private:
+	virtual bool PathExists_Internal(Board& board, Cell* pStart);
 	void AddIfPassableAndNotVisited(std::queue<Cell*> & cellQueue, Cell* pCell);
 };
 

@@ -8,10 +8,8 @@
 
 class DfsSolver : public Solver
 {
-public:
-	virtual bool PathExists_Internal(Board& board, Cell* pStart);
-
 private:
+	virtual bool PathExists_Internal(Board& board, Cell* pStart);
 	void AddIfPassableAndNotVisited(std::stack<Cell*> & cellStack, Cell* pCell);
 };
 
