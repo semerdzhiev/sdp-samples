@@ -10,7 +10,7 @@ public:
 
 	virtual bool Add(const int Value);
 	virtual bool Search(const int Value);
-	virtual void PrintInfo();
+	virtual void PrintInfo() const;
 
 private:
 	size_t BufferSize;

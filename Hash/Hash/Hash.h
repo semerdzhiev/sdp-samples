@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 ///
 ///	Represents a hashing function
 ///	
@@ -67,7 +69,21 @@ public:
 	
 	virtual bool Search(const int Value) = 0;
 
-	virtual void PrintInfo() = 0;
+	virtual void PrintInfo() const = 0;
+
+	void PrintCommonInfo(size_t ElementsCount, size_t MemoryUsed) const
+	{
+		size_t elementsSize = ElementsCount * sizeof(int);
+
+		size_t data = (elementsSize * 100) / MemoryUsed;
+		
+		std::cout
+			<< "\n   - Stored elements: " << ElementsCount
+			<< "\n   - Space required for elements: " << ElementsCount << " x sizeof(int) = " << elementsSize << " bytes"
+			<< "\n   - Memory used: " << MemoryUsed << " byte(s) (~ " << (MemoryUsed / ElementsCount) << " bytes per element)"
+			<< "\n   - Data vs Representation: " << data << "% data, " << (100 - data) << "% representation"
+			<< std::endl << std::endl;
+	}
 
 protected:
 	HashingFunction* pHashingFunction;

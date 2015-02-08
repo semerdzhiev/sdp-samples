@@ -5,12 +5,12 @@
 #include "SeparateChainingHash.h"
 #include "LinearProbingHash.h"
 
-const size_t ELEMENTS_IN_HASH = 3000;
+const size_t ELEMENTS_IN_HASH = 1000;
 
 void TestSearch(Hash* pHash, const char* pszName)
 {
 	const size_t LOOPS_COUNT = 5;
-	const size_t LOOP_LIMIT = ELEMENTS_IN_HASH + 10; // equal number of hits and misses
+	const size_t LOOP_LIMIT = ELEMENTS_IN_HASH *2; // equal number of hits and misses
 	
 	std::cout << "Testing " << pszName << std::endl;
 	std::cout << "   Performing " << (LOOPS_COUNT * LOOP_LIMIT) << " searches...\n";
@@ -66,6 +66,8 @@ int main()
 		std::cout << "\r" << (((double)i * 100) / ELEMENTS_IN_HASH) << "%";
 	}
 
+	std::cout << std::endl << std::endl;
+
 	nrh.PrintInfo();
 	schA.PrintInfo();
 	schB.PrintInfo();
@@ -75,8 +77,8 @@ int main()
 	std::cout << std::endl;
 
 	// Now test the hashes for performance
-	//TestSearch(&nrh, "Regular linked list");
-	//TestSearch(&schA, "SeparateChainingHash with 7 chains");
+	TestSearch(&nrh, "Regular linked list");
+	TestSearch(&schA, "SeparateChainingHash with 7 chains");
 	TestSearch(&schB, "SeparateChainingHash with 1597 chains");
 	TestSearch(&lphA, "LinearProbingHash with hashing function mod 7");
 	TestSearch(&lphB, "LinearProbingHash with hashing function mod 1597");

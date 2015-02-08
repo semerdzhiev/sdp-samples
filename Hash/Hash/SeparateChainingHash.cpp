@@ -41,7 +41,7 @@ bool SeparateChainingHash::Search(const int Value)
 	return false;
 }
 
-void SeparateChainingHash::PrintInfo()
+void SeparateChainingHash::PrintInfo() const
 {
 	size_t maxChainSize = pChains[0].size();
 	size_t sumOfSizes = pChains[0].size();
@@ -56,15 +56,24 @@ void SeparateChainingHash::PrintInfo()
 		minChainSize = std::min(minChainSize, size);
 	}
 
-	size_t MemoryUsed =
+	// NOTE: Microsoft specific. Assumes we are storing int elements
+	// and  using the default allocator.
+	static const size_t stlListNodeSize = sizeof(std::_List_node<int, void*>);
+	
+	size_t memoryUsed =
 		sizeof(*this) +  // object size
 		sizeof(std::list<int>) * ChainsCount + // vector of lists
-		sumOfSizes * (sizeof(int) + 16); // Elements allocated by lists
+		sumOfSizes * stlListNodeSize; // Nodes allocated by the lists
 
-	std::cout << "SeparateChainingHash stats:"
-			  << "\n   - Max chain size: " << maxChainSize
-			  << "\n   - Avg chain size: " << (sumOfSizes / ChainsCount)
-			  << "\n   - Min chain size: " << minChainSize
-			  << "\n   - Memory used: " << MemoryUsed << " byte(s)"
-			  << std::endl << std::endl;
+	size_t dataSize = sumOfSizes * sizeof(int);
+	size_t overhead = ((memoryUsed - dataSize) * 100) / memoryUsed;
+
+	std::cout
+		<< "SeparateChainingHash stats:"
+		<< "\n   - Max chain size: " << maxChainSize
+		<< "\n   - Avg chain size: " << (sumOfSizes / ChainsCount)
+		<< "\n   - Min chain size: " << minChainSize
+		<< "\n   - std::list node size: " << stlListNodeSize;
+
+	PrintCommonInfo(sumOfSizes, memoryUsed);
 }

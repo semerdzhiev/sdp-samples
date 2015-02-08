@@ -56,10 +56,11 @@ bool LinearProbingHash::Search(const int Value)
 	return false;
 }
 
-void LinearProbingHash::PrintInfo()
+void LinearProbingHash::PrintInfo() const
 {
-	std::cout << "LinearProbingHash:"
-		      << "\n   - Free space: " << (((double)ElementsCount * 100) / BufferSize) << "%"
-			  << "\n   - Memory used: " << (BufferSize * sizeof(int) + sizeof(*this)) << " byte(s)"
-			  << std::endl << std::endl;
+	std::cout
+		<< "LinearProbingHash:"
+		<< "\n   - Used space: " << (((double)ElementsCount * 100) / BufferSize) << "%";
+
+	PrintCommonInfo(ElementsCount, BufferSize * sizeof(int) + sizeof(*this));
 }

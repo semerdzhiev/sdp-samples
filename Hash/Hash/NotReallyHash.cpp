@@ -22,15 +22,17 @@ bool NotReallyHash::Search(const int Value)
 	return false;
 }
 
-void NotReallyHash::PrintInfo()
+void NotReallyHash::PrintInfo() const
 {
-	size_t MemoryUsed =
-		sizeof(*this) + // object size
-		sizeof(std::list<int>) + // size of the list object
-		Data.size() * (sizeof(int) + 16); // Elements allocated by lists
+	// NOTE: Microsoft specific. Assumes we are storing int elements
+	// and  using the default allocator.
+	static const size_t stlListNodeSize = sizeof(std::_List_node<int, void*>);
+
+	size_t memoryUsed =
+		sizeof(*this) +  // object size
+		Data.size() * stlListNodeSize; // nodes allocated by the list
 	
-	std::cout << "LinkedList:"
-		      << "\n   - Stored elements: " << Data.size()
-			  << "\n   - Memory used: " << MemoryUsed
-			  << std::endl << std::endl;
+	std::cout << "NotReallyHash:";
+
+	PrintCommonInfo(Data.size(), memoryUsed);
 }
