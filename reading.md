@@ -1,0 +1,48 @@
+Полезни източници
+===================
+
+
+Алгоритми
+-------------
+
+Седжуик, Р. (2003) **Алгоритми на C**, София: СофтПрес
+
+Наков, Преслав; Добриков, Панайот (2003) **Програмиране = ++Алгоритми**. София: Top Team Co. ISBN 954-8905-06-X
+
+Sedgewick, R. (1998) **Algorithms in C++, Parts 1-4: Fundamentals, Data Structure, Sorting, Searching**, 3rd ed. Addison-Wesley
+
+Sedgewick, R. (2001) **Algorithms in C++ Part 5: Graph Algorithms**, 3rd ed. Addison-Wesley
+
+Knuth, Donald (1997) **The Art of Computer Programming, 3 ed., vol. 1: Fundamental Algorithms**. Addison-Wesley
+
+Knuth, Donald (1997) **The Art of Computer programming, 3 ed., vol. 2: Seminumerical Algorithms**. Addison-Wesley
+
+Knuth, Donald (1998) **The Art of Computer programming, 2 ed., vol. 3: Sorting and Searching**. Addison-Wesley
+
+Knuth, Donald (2011) **The Art of Computer Programming, Vol. 4A: Combinatorial Algorithms, Part 1**. Addison-Wesley
+
+
+
+
+Git
+-------------
+
+Chacon, Scott; Straub, Ben (2014) **Pro Git, 2nd Edition**. http://git-scm.com/book/en/v2
+
+Mary Rose Cook. Git from the inside out. http://maryrosecook.com/blog/post/git-from-the-inside-out
+
+Mary Rose Cook. Git in six hundred words. http://maryrosecook.com/blog/post/git-in-six-hundred-words
+
+
+
+
+Сайтове с Tutorial и Reference материали
+-------------
+
+C++ Language Tutorial. http://www.cplusplus.com/doc/tutorial/
+
+C++ Reference. http://www.cplusplus.com/reference/
+
+Learn C++. http://www.learncpp.com/
+
+CProgramming.com. http://www.cprogramming.com/
