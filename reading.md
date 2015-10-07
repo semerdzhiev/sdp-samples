@@ -9,6 +9,8 @@
 
 Наков, Преслав; Добриков, Панайот (2003) **Програмиране = ++Алгоритми**. София: Top Team Co. ISBN 954-8905-06-X
 
+Cormen, T., Leiserson, C., Rivest, R., Stein, C. (2009)  **Introduction to Algorithms**, 3rd ed. MIT Press. ISBN 978-0-262-03384-8
+
 Sedgewick, R. (1998) **Algorithms in C++, Parts 1-4: Fundamentals, Data Structure, Sorting, Searching**, 3rd ed. Addison-Wesley
 
 Sedgewick, R. (2001) **Algorithms in C++ Part 5: Graph Algorithms**, 3rd ed. Addison-Wesley
