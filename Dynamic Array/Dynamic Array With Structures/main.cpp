@@ -37,6 +37,7 @@ void Init(DynamicArray* pArr)
 void Free(DynamicArray* pArr)
 {
 	delete [] pArr->pData;
+	pArr->pData = NULL;
 	pArr->Size = 0;
 	pArr->Used = 0;
 }
