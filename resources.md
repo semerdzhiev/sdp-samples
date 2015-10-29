@@ -23,6 +23,7 @@ Knuth, Donald (1998) **The Art of Computer programming, 2 ed., vol. 3: Sorting a
 
 Knuth, Donald (2011) **The Art of Computer Programming, Vol. 4A: Combinatorial Algorithms, Part 1**. Addison-Wesley
 
+Nystrom, Bob. **Data Locality**. http://gameprogrammingpatterns.com/data-locality.html
 
 
 
