@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Stack", "Stack\Stack.vcxproj", "{9660BF08-68C8-4C44-83A3-AC44F426A2D4}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackTest", "StackTest\StackTest.vcxproj", "{0BC3FFAE-ADAF-4CE1-9F0B-5E90D61E65CE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StackTestVs", "StackTestVs\StackTestVs.vcxproj", "{503A1F2F-B915-4429-8312-3A8411E8B44C}"
 EndProject
@@ -19,10 +17,6 @@ Global
 		{9660BF08-68C8-4C44-83A3-AC44F426A2D4}.Debug|Win32.Build.0 = Debug|Win32
 		{9660BF08-68C8-4C44-83A3-AC44F426A2D4}.Release|Win32.ActiveCfg = Release|Win32
 		{9660BF08-68C8-4C44-83A3-AC44F426A2D4}.Release|Win32.Build.0 = Release|Win32
-		{0BC3FFAE-ADAF-4CE1-9F0B-5E90D61E65CE}.Debug|Win32.ActiveCfg = Debug|Win32
-		{0BC3FFAE-ADAF-4CE1-9F0B-5E90D61E65CE}.Debug|Win32.Build.0 = Debug|Win32
-		{0BC3FFAE-ADAF-4CE1-9F0B-5E90D61E65CE}.Release|Win32.ActiveCfg = Release|Win32
-		{0BC3FFAE-ADAF-4CE1-9F0B-5E90D61E65CE}.Release|Win32.Build.0 = Release|Win32
 		{503A1F2F-B915-4429-8312-3A8411E8B44C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{503A1F2F-B915-4429-8312-3A8411E8B44C}.Debug|Win32.Build.0 = Debug|Win32
 		{503A1F2F-B915-4429-8312-3A8411E8B44C}.Release|Win32.ActiveCfg = Release|Win32
