@@ -1,3 +1,12 @@
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
@@ -8,13 +17,14 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace SortingTest
 {
 	///
-	/// Checks whether an array is sorted
+	/// Проверява дали масивът pArr е сортиран
 	///
-	/// The function assumes that the greater than operator (>)
-	/// is defined for the type T
+	/// Функцията предполага, че операторъ по-голямо (>)
+	/// е дефиниран за типа T.
 	///
 	/// \return
-	///		true if the array is sorted or empty (Size==0) or pArr==NULL
+	///    true, ако масивът е сортиран или празен (Size==0) или pArr==NULL;
+	///    false в противен случай.
 	///
 	template <typename T>
 	bool IsSorted(T* pArr, size_t Size)
