@@ -1,9 +1,11 @@
-Полезни източници
+Структури от данни и алгоритми: полезни източници
 ===================
 
+Този списък е част от хранилището на курса Структури от данни и алгоритми на C++ в GitHub (https://github.com/semerdzhiev/sdp-samples).
 
-Алгоритми
--------------
+
+Книги и статии
+--------------
 
 Седжуик, Р. (2003) **Алгоритми на C**, София: СофтПрес
 
@@ -27,6 +29,17 @@ Nystrom, Bob. **Data Locality**. http://gameprogrammingpatterns.com/data-localit
 
 
 
+Помощни материали
+-----------------
+
+Big-O Algorithm Complexity Cheat Sheet. http://bigocheatsheet.com/
+
+Comparison Sorting Algorithms. https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html
+
+Sorting Algorithm Animations. http://www.sorting-algorithms.com/
+
+
+
 Git
 -------------
 
@@ -46,7 +59,7 @@ Mary Rose Cook. Git in six hundred words. http://maryrosecook.com/blog/post/git-
 
 
 Сайтове с Tutorial и Reference материали
--------------
+----------------------------------------
 
 C++ Language Tutorial. http://www.cplusplus.com/doc/tutorial/
 
