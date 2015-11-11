@@ -100,6 +100,7 @@ int main()
 	TEST(InsertionSort, double);
 	TEST(ShellSort, double);
 	TEST(QuickSort, double);
+	TEST(QuickSortIterative, double);
 	TEST(HeapSort, double);
 	TEST(MergeSort, double);
 	TEST(BottomUpMergeSort, double);

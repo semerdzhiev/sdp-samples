@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <stack>
 #include <assert.h>
 
 ///
@@ -262,7 +263,7 @@ void InsertionSort(T* pArr, size_t Size)
 
 ///
 /// h-сортира елементите на pArr,
-/// които се намират на позиции i, i+h, i+2h, ...
+/// които се намират на позиции k, k+h, k+2h, ...
 ///
 template <class T>
 void ShellSortH(T* pArr, size_t Size, size_t k, size_t h)
@@ -308,6 +309,7 @@ void ShellSortH(T* pArr, size_t Size, size_t k, size_t h)
 	}
 }
 
+
 ///
 /// Сортировка на Шел (Shell Sort)
 ///
@@ -332,8 +334,9 @@ void ShellSort(T* pArr, size_t Size)
 	}
 }
 
+
 ///
-/// Бързо сортиране (QuickSort)
+/// Бързо сортиране (Quicksort)
 ///
 template <class T>
 void QuickSort(T* pArr, size_t Size)
@@ -347,6 +350,59 @@ void QuickSort(T* pArr, size_t Size)
 	QuickSort(pArr + pos + 1, Size - pos - 1);
 }
 
+
+///
+/// Итеративна версия на бързо сортиране (Quicksort)
+///
+template <class T>
+void QuickSortIterative(T* pArr, size_t Size)
+{
+	if (Size <= 1 || !pArr)
+		return;
+
+	std::stack<size_t> st;
+
+	// Добавяме началото и края на масива в стека
+	st.push(Size);
+	st.push(0);
+
+	size_t start, end, length;
+
+	while (!st.empty())
+	{
+		// Изваждаме началото и края на следващото парче от масива,
+		// което ще се обработва и намираме дължината му
+		start = st.top();
+		st.pop();
+		end = st.top();
+		st.pop();
+
+		length = end - start;
+
+		// Ако дължината е по-голяма от 1, изпълняваме един pass
+		if(length > 1)
+		{
+			size_t pos = Partition(pArr + start, length);
+			
+			// Начало и край на лявата част
+			st.push(start + pos);
+			st.push(start);
+
+			// Начало и край на дясната част
+			st.push(end);
+			st.push(start + pos + 1);
+		}
+	}
+}
+
+
+///
+/// Изпълнява един pass на бързото сортиране (Quicksort)
+///
+/// \return
+///    Индексът на елемента, който разделя двата
+///    новополучени масива.
+///
 template <class T>
 size_t Partition(T* pArr, size_t Size)
 {
@@ -598,6 +654,7 @@ template void InsertionSort<double>(double* pArr, size_t Size);
 template void ShellSortH<double>(double* pArr, size_t Size, size_t k, size_t h);
 template void ShellSort<double>(double* pArr, size_t Size);
 template void QuickSort<double>(double* pArr, size_t Size);
+template void QuickSortIterative<double>(double* pArr, size_t Size);
 template size_t Partition<double>(double* pArr, size_t Size);
 template void HeapSort<double>(double* pArr, size_t Size);
 template void Sift<double>(double* pArr, size_t pos, size_t Size);

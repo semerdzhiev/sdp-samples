@@ -20,6 +20,7 @@ template <class T> void InsertionSort(T* pArr, size_t Size);
 template <class T> void ShellSortH(T* pArr, size_t Size, size_t k, size_t h);
 template <class T> void ShellSort(T* pArr, size_t Size);
 template <class T> void QuickSort(T* pArr, size_t Size);
+template <class T> void QuickSortIterative(T* pArr, size_t Size);
 template <class T> size_t Partition(T* pArr, size_t Size);
 template <class T> void HeapSort(T* pArr, size_t Size);
 template <class T> void Sift(T* pArr, size_t pos, size_t Size);

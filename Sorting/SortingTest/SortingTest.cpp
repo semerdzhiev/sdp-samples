@@ -191,6 +191,11 @@ namespace SortingTest
 			TestSortingFunction(QuickSort<double>);
 		}
 
+		TEST_METHOD(QuickSortIterative_Test)
+		{
+			TestSortingFunction(QuickSortIterative<double>);
+		}
+
 		TEST_METHOD(HeapSort_Test)
 		{
 			TestSortingFunction(HeapSort<double>);
