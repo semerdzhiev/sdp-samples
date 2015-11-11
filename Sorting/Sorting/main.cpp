@@ -1,4 +1,4 @@
-/********************************************************************
+п»ї/********************************************************************
  *
  * This file is part of the Data Structures in C++ Course Examples package.
  *
@@ -12,7 +12,7 @@
 #include "Sorting.h"
 
 ///
-/// Показва съдържанието на pArr
+/// РџРѕРєР°Р·РІР° СЃСЉРґСЉСЂР¶Р°РЅРёРµС‚Рѕ РЅР° pArr
 ///
 template <class SAMPLE_TYPE>
 void PrintArray(const SAMPLE_TYPE* pArr, size_t Size)
@@ -34,16 +34,16 @@ void PrintArray(const SAMPLE_TYPE* pArr, size_t Size)
 
 
 ///
-/// Тества поведението на една сортираща функция
+/// РўРµСЃС‚РІР° РїРѕРІРµРґРµРЅРёРµС‚Рѕ РЅР° РµРґРЅР° СЃРѕСЂС‚РёСЂР°С‰Р° С„СѓРЅРєС†РёСЏ
 ///
 /// \param [in] pfnSort
-///     Указател към функцията, която ще се тества
+///     РЈРєР°Р·Р°С‚РµР» РєСЉРј С„СѓРЅРєС†РёСЏС‚Р°, РєРѕСЏС‚Рѕ С‰Рµ СЃРµ С‚РµСЃС‚РІР°
 ///
 /// \param [in] Name
-///     Името на функцията, която ще се тества
-///     Това е просто текст, който ще се изведе на екрана,
-///		за да се знае какво се обработва в момента и няма отношение
-///		към работата на функцията.
+///     РРјРµС‚Рѕ РЅР° С„СѓРЅРєС†РёСЏС‚Р°, РєРѕСЏС‚Рѕ С‰Рµ СЃРµ С‚РµСЃС‚РІР°
+///     РўРѕРІР° Рµ РїСЂРѕСЃС‚Рѕ С‚РµРєСЃС‚, РєРѕР№С‚Рѕ С‰Рµ СЃРµ РёР·РІРµРґРµ РЅР° РµРєСЂР°РЅР°,
+///		Р·Р° РґР° СЃРµ Р·РЅР°Рµ РєР°РєРІРѕ СЃРµ РѕР±СЂР°Р±РѕС‚РІР° РІ РјРѕРјРµРЅС‚Р° Рё РЅСЏРјР° РѕС‚РЅРѕС€РµРЅРёРµ
+///		РєСЉРј СЂР°Р±РѕС‚Р°С‚Р° РЅР° С„СѓРЅРєС†РёСЏС‚Р°.
 ///
 template <class SAMPLE_TYPE>
 void TestSortingFunction(void pfnSort(SAMPLE_TYPE*, size_t), const char* Name)
@@ -60,7 +60,7 @@ void TestSortingFunction(void pfnSort(SAMPLE_TYPE*, size_t), const char* Name)
 	const int SampleSize = 10;
 	const int SamplesCount = 6;
 
-	// Извеждаме информация за тестовете
+	// РР·РІРµР¶РґР°РјРµ РёРЅС„РѕСЂРјР°С†РёСЏ Р·Р° С‚РµСЃС‚РѕРІРµС‚Рµ
 	std::cout << "Testing " << Name;
 	std::cout << "\n    Samples: " << SamplesCount;
 	std::cout << "\n    Sample size: " << SampleSize;
@@ -72,7 +72,7 @@ void TestSortingFunction(void pfnSort(SAMPLE_TYPE*, size_t), const char* Name)
 		PrintArray<SAMPLE_TYPE>(DataSamples[i], SampleSize);
 	}
 
-	// Изпълняваме тестовете
+	// РР·РїСЉР»РЅСЏРІР°РјРµ С‚РµСЃС‚РѕРІРµС‚Рµ
 	std::cout << "\n\n    Sorting results:";
 
 	for (int i = 0; i < SamplesCount; i++)
@@ -86,7 +86,7 @@ void TestSortingFunction(void pfnSort(SAMPLE_TYPE*, size_t), const char* Name)
 }
 
 ///
-/// Провежда тестове за една функция, като се указва и типът на данните (int или double)
+/// РџСЂРѕРІРµР¶РґР° С‚РµСЃС‚РѕРІРµ Р·Р° РµРґРЅР° С„СѓРЅРєС†РёСЏ, РєР°С‚Рѕ СЃРµ СѓРєР°Р·РІР° Рё С‚РёРїСЉС‚ РЅР° РґР°РЅРЅРёС‚Рµ (int РёР»Рё double)
 ///
 #define TEST(x, SAMPLE_TYPE) TestSortingFunction<SAMPLE_TYPE>(x, #x)
 
