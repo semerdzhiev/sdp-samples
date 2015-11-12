@@ -16,7 +16,7 @@
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
-namespace StackTestVs
+namespace StackTest
 {
 	///
 	/// A pop on an emty stack should return false

@@ -15,7 +15,7 @@
 ///
 /// An implementation of a FILO stack
 ///
-/// The size of the maximum size of the stack is fixed
+/// The maximum size of the stack is fixed
 /// and cannot be changed.
 ///
 /// The memory for the elements is allocated on the stack.
