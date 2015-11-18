@@ -27,6 +27,7 @@ Knuth, Donald (2011) **The Art of Computer Programming, Vol. 4A: Combinatorial A
 
 Nystrom, Bob. **Data Locality**. http://gameprogrammingpatterns.com/data-locality.html
 
+Mount, David (1998) **CMSC 251: Algorithms - Lecture Notes**. http://www.cs.umd.edu/~meesh/351/mount/251lects.ps
 
 
 Помощни материали
