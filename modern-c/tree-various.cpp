@@ -1,6 +1,6 @@
 
 // treeprint.cpp : Defines the entry point for the console application.
-//
+// by Gheorghi Penkov
 
 #include "stdafx.h"
 #include <iostream>
@@ -9,6 +9,7 @@
 #include <string>
 #include <list>
 #include <memory>
+#include <map>
 
 std::string INPUT = "\
 A 3 B C D \n\
@@ -111,8 +112,6 @@ void Tree<T>::build( std::istringstream& iss) {
 		}
 	}
 }
-
-#include <map>
 
 typedef Tree<char>::Node treeenode;
 typedef std::list < treeenode* > nodelist;
