@@ -1,5 +1,5 @@
 // dfs.cpp : Defines the entry point for the console application.
-//
+// by Gheorghi Penkov
 
 #include "stdafx.h"
 #include <time.h>
