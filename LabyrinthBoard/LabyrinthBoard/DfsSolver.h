@@ -1,5 +1,13 @@
-#ifndef DFS_SOLVER_H
-#define DFS_SOLVER_H
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
+#pragma once
 
 #include <stack>
 
@@ -12,6 +20,3 @@ private:
 	virtual bool PathExists_Internal(Board& board, Cell* pStart);
 	void AddIfPassableAndNotVisited(std::stack<Cell*> & cellStack, Cell* pCell);
 };
-
-
-#endif // DFS_SOLVER_H

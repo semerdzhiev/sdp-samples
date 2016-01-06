@@ -1,5 +1,13 @@
-#ifndef BOARD_H
-#define BOARD_H
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
+#pragma once
 
 #include <fstream>
 
@@ -51,5 +59,3 @@ public:
 
 	void MarkAllCellsNotVisited();
 };
-
-#endif // BOARD_H

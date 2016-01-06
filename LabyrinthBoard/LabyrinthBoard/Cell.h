@@ -1,5 +1,13 @@
-#ifndef CELL_H
-#define CELL_H
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
+#pragma once
 
 class Cell;
 
@@ -66,5 +74,3 @@ private:
 
 	friend class Board;
 };
-
-#endif // CELL_H

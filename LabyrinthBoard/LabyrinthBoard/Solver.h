@@ -1,5 +1,13 @@
-#ifndef SOLVER_H
-#define SOLVER_H
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
+#pragma once
 
 #include "Cell.h"
 #include "Board.h"
@@ -16,6 +24,3 @@ public:
 protected:
 	virtual bool PathExists_Internal(Board& board, Cell* pStart) = 0;
 };
-
-
-#endif // SOLVER_H
