@@ -1,7 +1,20 @@
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
 #pragma once
 
 #include "Hash.h"
 
+
+///
+/// An implementation of a Linear Probing hash
+///
 class LinearProbingHash : public Hash
 {
 public:

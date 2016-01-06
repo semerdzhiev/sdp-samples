@@ -1,3 +1,12 @@
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
 #pragma once
 
 #include <iostream>
@@ -20,6 +29,8 @@ public:
 ///
 ///	A modular hashing function
 ///
+/// The hash for a specific value V is calculated as V % Mod
+///
 class ModularHashingFunction : public HashingFunction
 {
 public:
@@ -30,23 +41,36 @@ public:
 
 	virtual int CalculateHash(int Value)
 	{
-		/*
-		int result = 1;
-
-		while (Value)
-		{
-			result = ((result << 4) | (Value & 0xF)) % Mod;
-			Value >>= 4;
-		}
-
-		return result;
-		*/
-		
 		return Value % Mod;
 	}
 
 private:
 	int Mod;
+};
+
+
+///
+/// A hashing function, which tries not to cluster the hash values
+///
+/// The hash for a specific value V is calculated as (V % Mod) * Multiplier
+///
+class ModAndMultiplyHashingFunction : public HashingFunction
+{
+public:
+    ModAndMultiplyHashingFunction(int Mod, int Multiplier)
+    {
+        this->Mod = Mod;
+        this->Multiplier = Multiplier;
+    }
+    
+    virtual int CalculateHash(int Value)
+    {
+        return (Value % Mod) * Multiplier;
+    }
+
+private:
+    int Mod;
+    int Multiplier;
 };
 
 

@@ -1,21 +1,30 @@
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
 #include <iostream>
 #include <algorithm>
 
 #include "SeparateChainingHash.h"
 
-SeparateChainingHash::SeparateChainingHash(HashingFunction* pHashingFunction, size_t ChainsCount) : Hash(pHashingFunction)
+SeparateChainingHashStl::SeparateChainingHashStl(HashingFunction* pHashingFunction, size_t ChainsCount) : Hash(pHashingFunction)
 {
 	pChains = new std::list<int>[ChainsCount];
 
 	this->ChainsCount = ChainsCount;
 }
 
-SeparateChainingHash::~SeparateChainingHash()
+SeparateChainingHashStl::~SeparateChainingHashStl()
 {
 	delete [] pChains;
 }
 
-bool SeparateChainingHash::Add(const int Value)
+bool SeparateChainingHashStl::Add(const int Value)
 {
 	int hash = pHashingFunction->CalculateHash(Value);
 
@@ -24,7 +33,7 @@ bool SeparateChainingHash::Add(const int Value)
 	return true;
 }
 
-bool SeparateChainingHash::Search(const int Value)
+bool SeparateChainingHashStl::Search(const int Value)
 {
 	int hash = pHashingFunction->CalculateHash(Value);
 
@@ -41,7 +50,7 @@ bool SeparateChainingHash::Search(const int Value)
 	return false;
 }
 
-void SeparateChainingHash::PrintInfo() const
+void SeparateChainingHashStl::PrintInfo() const
 {
 	size_t maxChainSize = pChains[0].size();
 	size_t sumOfSizes = pChains[0].size();
@@ -69,7 +78,7 @@ void SeparateChainingHash::PrintInfo() const
 	size_t overhead = ((memoryUsed - dataSize) * 100) / memoryUsed;
 
 	std::cout
-		<< "SeparateChainingHash stats:"
+		<< "SeparateChainingHashStl stats:"
 		<< "\n   - Max chain size: " << maxChainSize
 		<< "\n   - Avg chain size: " << (sumOfSizes / ChainsCount)
 		<< "\n   - Min chain size: " << minChainSize
@@ -77,3 +86,112 @@ void SeparateChainingHash::PrintInfo() const
 
 	PrintCommonInfo(sumOfSizes, memoryUsed);
 }
+
+
+SeparateChainingHash::SeparateChainingHash(HashingFunction* pHashingFunction, size_t ChainsCount) : Hash(pHashingFunction)
+{
+    pChains = new Box*[ChainsCount];
+    
+    for (size_t i = 0; i < ChainsCount; i++)
+        pChains[i] = NULL;
+
+    this->ChainsCount = ChainsCount;
+}
+
+SeparateChainingHash::~SeparateChainingHash()
+{
+    Box *p;
+
+    for (size_t i = 0; i < ChainsCount; i++)
+    {
+        while (pChains[i])
+        {
+            p = pChains[i];
+            pChains[i] = pChains[i]->pNext;
+            delete p;
+        }
+    }
+
+    delete[] pChains;
+}
+
+bool SeparateChainingHash::Add(const int Value)
+{
+    int hash = pHashingFunction->CalculateHash(Value);
+
+    try
+    {
+        pChains[hash] = new Box(Value, pChains[hash]);
+    }
+    catch (...)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool SeparateChainingHash::Search(const int Value)
+{
+    int hash = pHashingFunction->CalculateHash(Value);
+
+    Box* p = pChains[hash];
+
+    while (p)
+    {
+        if (p->Data == Value)
+            return true;
+
+        p = p->pNext;
+    }
+
+    return false;
+}
+
+void SeparateChainingHash::PrintInfo() const
+{
+    size_t maxChainSize = GetChainSize(pChains[0]);
+    size_t sumOfSizes = maxChainSize;
+    size_t minChainSize = maxChainSize;
+
+    for (size_t i = 1; i < ChainsCount; i++)
+    {
+        size_t size = GetChainSize(pChains[i]);
+
+        sumOfSizes += size;
+        maxChainSize = std::max(maxChainSize, size);
+        minChainSize = std::min(minChainSize, size);
+    }
+
+    size_t memoryUsed =
+        sizeof(*this) +  // object size
+        sizeof(Box*) * ChainsCount + // vector of lists
+        sumOfSizes * sizeof(Box); // Nodes allocated for the lists
+
+    size_t dataSize = sumOfSizes * sizeof(int);
+    size_t overhead = ((memoryUsed - dataSize) * 100) / memoryUsed;
+
+    std::cout
+        << "SeparateChainingHashStl stats:"
+        << "\n   - Max chain size: " << maxChainSize
+        << "\n   - Avg chain size: " << (sumOfSizes / ChainsCount)
+        << "\n   - Min chain size: " << minChainSize
+        << "\n   - list node size: " << sizeof(Box);
+
+    PrintCommonInfo(sumOfSizes, memoryUsed);
+}
+
+size_t SeparateChainingHash::GetChainSize(const Box * pFirst) const
+{
+    size_t size = 0;
+
+    while (pFirst)
+    {
+        size++;
+        pFirst = pFirst->pNext;
+    }
+
+    return size;
+}
+
+

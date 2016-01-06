@@ -1,3 +1,12 @@
+/********************************************************************
+ *
+ * This file is part of the Data Structures in C++ Course Examples package.
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
 #include <iostream>
 
 #include "LinearProbingHash.h"
@@ -10,17 +19,19 @@ LinearProbingHash::LinearProbingHash(HashingFunction* pHashingFunction, size_t M
 
 	pBuffer = new int[BufferSize];
 
-	// Mark positions as empty
+	// Mark all positions as empty
 	for(size_t i = 0; i < BufferSize; i++)
 	{
 		pBuffer[i] = -1;
 	}
 }
 
+
 LinearProbingHash::~LinearProbingHash()
 {
 	delete [] pBuffer;
 }
+
 
 bool LinearProbingHash::Add(const int Value)
 {
