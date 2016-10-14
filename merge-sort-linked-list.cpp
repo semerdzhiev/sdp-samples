@@ -1,5 +1,5 @@
-// msort.llist.cpp : Defines the entry point for the console application.
-// by Georghi Penkov
+// msort.llist.cpp : apply merge sort to a linked list
+// by Gheorghi Penkov @ FMI @ Sofia University
 
 #include "stdafx.h"
 #include <time.h>
@@ -73,8 +73,6 @@ typename llist<T>::node* llist<T>::merge(
 	typename llist<T>::node* lp, 
 	typename llist<T>::node* rp) {
 
-//	node *lp = left;		// left part
-//	node *rp = right;	// right part
 	node *mp = NULL;		// merged product
 	node *res = NULL;
 
@@ -129,15 +127,16 @@ typename llist<T>::node* llist<T>::merge(
 
 template <typename T>
 typename llist<T>::node* llist<T>::msort(node* what) {
-	bool init = what ? false : true;
-	what = what ? what : root;
-	size_t sz = what->dynlen();
+	const bool init = what ? false : true;
+	const what = what ? what : root;
+	const size_t sz = what->dynlen();
 
 	if (sz == 1) return what;
 
 	node* left = what;
 	node* right = what; // just for init...
 
+	// figure out "middle" element
 	for (size_t i = 0; i < sz / 2; i++) {
 		if (i + 1 == sz / 2) {
 			node *temp = right;
