@@ -1,7 +1,4 @@
-// mergesort.cpp : Defines the entry point for the console application.
-//
-
-#include "stdafx.h"
+// mergesort.cpp : a very straightfoward 50 lines merge sort implementation
 
 int arr[] = { 1, 5, -1, 6, 7, 4 };
 
@@ -24,16 +21,14 @@ void merge(const size_t from, const size_t to) {
 		}
 
 	}
-
-	// copy in place
+	// copy back and free mem
 	memcpy(arr + from, buf, cnt * sizeof(int));
 	delete buf;
 }
 
 void sort(const size_t from, const size_t to) {
-	if (to == from) return;
-	
-	if (to - from == 1) {
+	if (to == from) return;	// 1 element	
+	if (to - from == 1) {	// 2 elements
 		if (arr[from] > arr[to]) {
 			const int temp = arr[to];
 			arr[to] = arr[from];
@@ -48,9 +43,7 @@ void sort(const size_t from, const size_t to) {
 	merge(from, to);
 }
 
-
 int main() {
 	sort(0, sizeof(arr) / 4 - 1);
 	return 0;
 }
-
