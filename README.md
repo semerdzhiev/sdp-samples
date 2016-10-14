@@ -16,10 +16,17 @@
 3. **Dynamic Array Extended** - Разширение на обектно-ориентираната реализация на динамичен масив. В тази версия е добавена обработка на изключения и се демонстрира употребата на Proxy клас в реализацията на оператора [].
 
 ### Sorting
-Примери за сортиране
+
+* merge-sort-simple-2016.cpp	- a very simple (50 lines) merge sort
+* merge-sort-linked-list.cpp	- generic merge sort over templated linked ist
+* merge-sort-static-list.cpp  - merge sort on static list (not so smart implementation)
 
 ### Stack
 Съдържа пример за реализация на стек, а също и примери за Unit Testing
 
 1. **Stack** - Съдържа реализация на стек с фиксиран брой на елементите
 2. **StackTest** -  Съдържа пример за Unit Test-ове върху класа FixedSizeStack. В примера е реализирана проста рамка за Unit Test-ове.
+
+### Combinatorial
+
+* combinations-2016.cpp - gen all combinations of N elements K class
