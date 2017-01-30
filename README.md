@@ -27,6 +27,9 @@
 1. **Stack** - Съдържа реализация на стек с фиксиран брой на елементите
 2. **StackTest** -  Съдържа пример за Unit Test-ове върху класа FixedSizeStack. В примера е реализирана проста рамка за Unit Test-ове.
 
-### Combinatorial
+### Combinatorial & Data Structures w/STL
 
 * combinations-2016.cpp - gen all combinations of N elements K class
+* huffman-modernist.2016.cpp - brief huffman coding w/C++11 stuff in it
+* maze-recursive.2016.cpp - walking a maze in plain C
+* fsm-simple.stl-2016.cpp - some C++11 magic put to work into simple Finite State Automata
