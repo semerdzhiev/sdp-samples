@@ -66,6 +66,10 @@ C++ Language Tutorial. http://www.cplusplus.com/doc/tutorial/
 
 C++ Reference. http://www.cplusplus.com/reference/
 
+cppreference.com: C++ reference. http://en.cppreference.com/w/cpp
+
+ISO C++. https://isocpp.org/
+
 Learn C++. http://www.learncpp.com/
 
 CProgramming.com. http://www.cprogramming.com/
