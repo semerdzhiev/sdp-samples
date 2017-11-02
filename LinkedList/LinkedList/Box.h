@@ -29,7 +29,7 @@ public:
 ///	Creates a new element and initializes its members
 ///
 template <class T>
-Box<T>::Box(T const & Data, Box<T> *pNext = NULL)
+Box<T>::Box(T const & Data, Box<T> *pNext)
 {
 	this->Data = Data;
 	this->pNext = pNext;

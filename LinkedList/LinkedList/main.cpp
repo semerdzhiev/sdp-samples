@@ -17,7 +17,7 @@ void FillList(LinkedList<int> &List, int Start, int End)
 int main()
 {
 	// Decide how many element to use for the tests
-	size_t ElementsCount = 0;
+	int ElementsCount = 0;
 
 	std::cout << "\nHow many elements to test with?\n: ";
 	
