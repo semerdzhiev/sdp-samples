@@ -58,6 +58,6 @@ bool Solver::PathExists(Board& board)
 		pStart->PrintInfo();
 		std::cout << std::endl << std::endl;
 
-		return PathExists_Internal(board, board.GetStart());
+		return PathExists_Internal(board, pStart);
 	}
 }
