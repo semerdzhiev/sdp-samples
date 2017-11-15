@@ -105,6 +105,7 @@ void DynamicArray::Reallocate(size_t NewSize)
 
 	pData = pTemp;
 	AllocatedSize = NewSize;
+	Length = limit;
 }
 
 
