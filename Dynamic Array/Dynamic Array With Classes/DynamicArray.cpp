@@ -113,13 +113,14 @@ void DynamicArray::Reallocate(size_t NewSize)
 	// колко елемента ще бъдат копирани
 	size_t limit = std::min(AllocatedSize, NewSize);
 
-	for(size_t i = 0; i < limit; i++)
+	for(size_t i = 0; i < limit; ++i)
 		pTemp[i] = pData[i];
 
 	delete [] pData;
 
 	pData = pTemp;
 	AllocatedSize = NewSize;
+	Length = limit;
 }
 
 
