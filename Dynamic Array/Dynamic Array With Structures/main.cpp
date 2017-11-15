@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <algorithm>
 
 ///
@@ -49,8 +49,11 @@ void Free(DynamicArray* pArr)
 void Reallocate(DynamicArray* pArr, size_t NewSize)
 {
 	int* pTemp = new int[NewSize];
+	
+	// update pArr->Used if we shrink the array (pArr->Used < NewSize)
+	pArr->Used = std::min(pArr->Used, NewSize);
 
-	for(size_t i = 0; i < std::min(pArr->Size, NewSize); i++)
+	for(size_t i = 0; i < pArr->Used; ++i)
 		pTemp[i] = pArr->pData[i];
 
 	delete [] pArr->pData;
