@@ -19,6 +19,8 @@ Sedgewick, R. (2001) **Algorithms in C++ Part 5: Graph Algorithms**, 3rd ed. Add
 
 Sedgewick, R.; Wayne, K (2011) **Algorithms**, 4th edition. Addison-Wesley
 
+Weiss, Mark Allen (2014) **Data Structures and Algorithm Analysis in C++**  ISBN 978-0-13-284737-7
+
 Knuth, Donald (1997) **The Art of Computer Programming, 3 ed., vol. 1: Fundamental Algorithms**. Addison-Wesley
 
 Knuth, Donald (1997) **The Art of Computer programming, 3 ed., vol. 2: Seminumerical Algorithms**. Addison-Wesley
@@ -32,6 +34,9 @@ Morin, Pat. **Open Data Structures (in C++)**. http://opendatastructures.org/ods
 Nystrom, Bob. **Data Locality**. http://gameprogrammingpatterns.com/data-locality.html
 
 Mount, David (1998) **CMSC 251: Algorithms - Lecture Notes**. http://www.cs.umd.edu/~meesh/351/mount/251lects.ps
+
+
+Bloch, Joshua (2006) **Extra, Extra - Read All About It: Nearly All Binary Searches and Mergesorts are Broken** https://research.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html
 
 
 ## Помощни материали
