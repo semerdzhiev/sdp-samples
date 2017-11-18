@@ -19,11 +19,7 @@ template <class T>
 void swapif(T& a, T& b)
 {
 	if( b < a )
-	{
-		T temp(a);
-		a = b;
-		b = temp;
-	}
+		std::swap(a, b);
 }
 
 
