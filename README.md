@@ -1,35 +1,38 @@
-﻿Примери за алгоритми и структури от данни на C++
+﻿Data structures and algorithms in C++ examples
 ===================================
 
-Проектът съдържа примери, които демонстрират реализацията на
-различни алгоритми и структури от данни на C++.
+The repository contains implementations of different data structures and algorithms in C/C++.
+They are intended to be used as educational examples.
 
-Примерите са групирани в различни директории, според
-темата, към която се отнасят (напр. динамичен масив).
+The examples are grouped in directories, by topic, as follows:
 
-Списък на примерите
---------------------
+## Contents
 
-### Dynamic Array (динамичен масив)
-1. **Dynamic Array With Structures** - Проста реализация на динамичен масив с помощта на структура и няколко функции.
-2. **Dynamic Array With Classes** - Обектно-ориентирана реализация на динамичен масив.
-3. **Dynamic Array Extended** - Разширение на обектно-ориентираната реализация на динамичен масив. В тази версия е добавена обработка на изключения и се демонстрира употребата на Proxy клас в реализацията на оператора [].
+### DynamicArray (динамичен масив)
+1. **Simple** - A simple, C-style implementation
+2. **DynamicArray** - An object-oriented implementation. Also demonstrates proxies, operator ovearloading.
+
+### Hash
+Contains implementations of separate chaining and linear probing hashes
+
+### LabyrinthBoard
+Demonstrates breadth-first and depth-first searching over a square, chess-like board.
+
+### LinkedList
+An implementation of a linked list
 
 ### Sorting
-
-* merge-sort-simple-2016.cpp	- a very simple (50 lines) merge sort
-* merge-sort-linked-list.cpp	- generic merge sort over templated linked ist
-* merge-sort-static-list.cpp  - merge sort on static list (not so smart implementation)
+1. **Sorting** - Implementations of the most popular sorting algorithms. Also includes unit tests.
+2. merge-sort-simple-2016.cpp - a very simple (50 lines) merge sort
+3. merge-sort-linked-list.cpp - generic merge sort over templated linked ist
+4. merge-sort-static-list.cpp - merge sort on static list (not so smart implementation)
 
 ### Stack
-Съдържа пример за реализация на стек, а също и примери за Unit Testing
-
-1. **Stack** - Съдържа реализация на стек с фиксиран брой на елементите
-2. **StackTest** -  Съдържа пример за Unit Test-ове върху класа FixedSizeStack. В примера е реализирана проста рамка за Unit Test-ове.
+1. **Stack** - contains static, fixed size and linked implementations of a stack.
+2. **StackTest** - demonstrates the use of unit tests, using a custom unit test framework.
 
 ### Combinatorial & Data Structures w/STL
-
-* combinations-2016.cpp - gen all combinations of N elements K class
-* huffman-modernist.2016.cpp - brief huffman coding w/C++11 stuff in it
-* maze-recursive.2016.cpp - walking a maze in plain C
-* fsm-simple.stl-2016.cpp - some C++11 magic put to work into simple Finite State Automata
+1. combinations-2016.cpp - gen all combinations of N elements K class
+2. huffman-modernist.2016.cpp - brief huffman coding w/C++11 stuff in it
+3. maze-recursive.2016.cpp - walking a maze in plain C
+4. fsm-simple.stl-2016.cpp - some C++11 magic put to work into simple Finite State Automata
