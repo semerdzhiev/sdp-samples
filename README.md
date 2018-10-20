@@ -1,12 +1,14 @@
-﻿Data structures and algorithms in C++ examples
+﻿Data structures and algorithms in C++
 ===================================
 
-The repository contains implementations of different data structures and algorithms in C/C++.
-They are intended to be used as educational examples.
+The repository contains implementations of different data structures and algorithms in C/C++. They are intended to be used as educational examples.
 
 The examples are grouped in directories, by topic, as follows:
 
 ## Contents
+
+### Array Waling
+A simple demonstration of the effects of locality on performance.
 
 ### DynamicArray (динамичен масив)
 1. **Simple** - A simple, C-style implementation
