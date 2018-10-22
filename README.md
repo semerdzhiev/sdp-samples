@@ -10,7 +10,7 @@ The examples are grouped in directories, by topic, as follows:
 ### Array Waling
 A simple demonstration of the effects of locality on performance.
 
-### DynamicArray (динамичен масив)
+### DynamicArray
 1. **Simple** - A simple, C-style implementation
 2. **DynamicArray** - An object-oriented implementation. Also demonstrates proxies, operator ovearloading.
 
