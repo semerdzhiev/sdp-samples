@@ -16,11 +16,41 @@ class DynamicArrayElementProxy;
 ///
 class DynamicArray
 {
+public:
+	///
+	/// Represents one element in the dynamic array
+	///
+	class ElementProxy
+	{
+	private:
+		DynamicArray * pArray; /// Pointer to the dynamic array that created the proxy object
+		size_t ElementIndex;   /// Index of the element represented by the proxy
+
+	public:
+		ElementProxy(DynamicArray *, size_t);
+		ElementProxy& operator=(int);
+		operator int() const;
+	};
+
+
+	class Iterator {
+	private:
+		DynamicArray * pArray;
+		size_t Index; /// Current position of the iterator in the array
+	public:
+		Iterator(DynamicArray *pArray);
+		int GetCurrent() const;
+		void SetCurrent(int);
+		void MoveNext();
+		void Rewind();
+		bool EndReached() const;
+	};
+
+
 private:
-    
-	int *pData;           /// Pointer to the array's contents
+	int *pData;        /// Pointer to the array's contents
 	size_t BufferSize; /// Size of the allocated buffer
-	size_t Size; /// Number of elements currently stored in the array
+	size_t Size;       /// Number of elements currently stored in the array
 
 public:
 	DynamicArray();
@@ -30,8 +60,9 @@ public:
 
 public:
 	void Clear();
-	
+
 	void PushBack(int Element);
+	void PopBack();
 
     void Reserve(size_t Size);
 
@@ -41,13 +72,15 @@ public:
 	int GetAt(size_t) const;
 	void SetAt(size_t, int);
 
+	Iterator GetIterator();
+
 	void Print() const;
 
 public:
     DynamicArray& operator+=(DynamicArray const &);
     DynamicArray operator+(DynamicArray const &) const;
-	DynamicArrayElementProxy operator[](size_t);
-	const DynamicArrayElementProxy operator[](size_t) const;
+	ElementProxy operator[](size_t);
+	const ElementProxy operator[](size_t) const;
 
 private:
 	void CopyFrom(DynamicArray const &);
@@ -56,20 +89,3 @@ private:
 };
 
 
-///
-/// Represents one element in the dynamic array
-///
-class DynamicArrayElementProxy
-{
-private:
-    /// Pointer to the dynamic array that created the proxy object
-    DynamicArray *pParent;     
-
-    /// Index of the element represented by the proxy
-    size_t ParentElementIndex; 
-	
-public:
-	DynamicArrayElementProxy(DynamicArray *, size_t);
-	DynamicArrayElementProxy& operator=(int);
-    operator int() const;
-};

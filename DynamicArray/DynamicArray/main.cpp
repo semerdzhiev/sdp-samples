@@ -86,6 +86,22 @@ int main()
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 	}
 
+
+	//
+	// 6: Access the elements of the array using an interator
+	//
+
+	std::cout << "\nAccess the elements of the array using an interator...\n";
+
+	for (DynamicArray::Iterator it = da.GetIterator();
+		!it.EndReached();
+		it.MoveNext())
+	{
+		std::cout << it.GetCurrent() << " ";
+	}
+
+	std::cout << "\n\n";
+
 	return 0;
 }
 

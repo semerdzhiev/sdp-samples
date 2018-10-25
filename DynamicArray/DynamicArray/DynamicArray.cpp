@@ -87,6 +87,19 @@ void DynamicArray::PushBack(int Element)
 
 
 ///
+/// Removes the last element of the array
+///
+/// If the array is empty, the function does nothing
+///
+void DynamicArray::PopBack()
+{
+	if (Size > 0)
+		--Size;
+}
+
+
+
+///
 /// Ensure that the dynamic array will be able
 /// to store at least Size elements without
 /// performing reallocations.
@@ -144,6 +157,11 @@ void DynamicArray::SetAt(size_t index, int value)
         throw std::out_of_range("Index out of range!");
 
     pData[index] = value;
+}
+
+DynamicArray::Iterator DynamicArray::GetIterator()
+{
+	return DynamicArray::Iterator(this);
 }
 
 
@@ -288,9 +306,9 @@ DynamicArray DynamicArray::operator+ (DynamicArray const& rhs) const
 ///    Even if the underlying buffer is reallocated at a different addres,
 ///    the proxy object will continue to point to the element at the given index.
 ///
-DynamicArrayElementProxy DynamicArray::operator[](size_t index)
+DynamicArray::ElementProxy DynamicArray::operator[](size_t index)
 {
-	return DynamicArrayElementProxy(this, index);
+	return ElementProxy(this, index);
 }
 
 
@@ -303,11 +321,11 @@ DynamicArrayElementProxy DynamicArray::operator[](size_t index)
 /// For additional information check the remarks to the non-constant
 /// version of the subscript operator
 ///
-const DynamicArrayElementProxy DynamicArray::operator[](size_t index) const
+const DynamicArray::ElementProxy DynamicArray::operator[](size_t index) const
 {
 	// We need a const_cast, because the proxy's constructor
 	// will only accept a non-constant object
-	return DynamicArrayElementProxy(const_cast<DynamicArray*>(this), index);
+	return ElementProxy(const_cast<DynamicArray*>(this), index);
 }
 
 
@@ -320,9 +338,9 @@ const DynamicArrayElementProxy DynamicArray::operator[](size_t index) const
 /// Constructs a proxy object, which represents the element
 /// at position ElementIndex in the dynamic array pointed to by pParent
 ///
-DynamicArrayElementProxy::DynamicArrayElementProxy(DynamicArray * pDynamicArray, size_t ElementIndex) :
-	pParent(pDynamicArray),
-	ParentElementIndex(ElementIndex)
+DynamicArray::ElementProxy::ElementProxy(DynamicArray * pDynamicArray, size_t ElementIndex) :
+	pArray(pDynamicArray),
+	ElementIndex(ElementIndex)
 {
 }
 
@@ -330,18 +348,52 @@ DynamicArrayElementProxy::DynamicArrayElementProxy(DynamicArray * pDynamicArray,
 ///
 /// Returns the element's value
 ///
-DynamicArrayElementProxy::operator int() const
+DynamicArray::ElementProxy::operator int() const
 {
-	return pParent->GetAt(ParentElementIndex);
+	return pArray->GetAt(ElementIndex);
 }
 
 
 ///
 /// Modifies the element's value
 ///
-DynamicArrayElementProxy& DynamicArrayElementProxy::operator=(int value)
+DynamicArray::ElementProxy& DynamicArray::ElementProxy::operator=(int value)
 {
-	pParent->SetAt(ParentElementIndex, value);
+	pArray->SetAt(ElementIndex, value);
 
 	return *this;
 }
+
+DynamicArray::Iterator::Iterator(DynamicArray * pArray) :
+	pArray(pArray),
+	Index(0)
+{
+}
+
+int DynamicArray::Iterator::GetCurrent() const
+{
+	return pArray->GetAt(Index);
+}
+
+void DynamicArray::Iterator::SetCurrent(int Value)
+{
+	pArray->SetAt(Index, Value);
+}
+
+void DynamicArray::Iterator::MoveNext()
+{
+	if(Index < pArray->GetSize())
+		++Index;
+}
+
+void DynamicArray::Iterator::Rewind()
+{
+	Index = 0;
+}
+
+bool DynamicArray::Iterator::EndReached() const
+{
+	return Index >= pArray->GetSize();
+}
+
+
