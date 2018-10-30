@@ -1,6 +1,6 @@
 ﻿/********************************************************************
  *
- * This file is part of the Data structures and algorithms in C++ examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -10,8 +10,6 @@
 #include <iostream>
 #include <algorithm>
 
-#include <vector>
-
 #include "DynamicArray.h"
 
 ///
@@ -19,7 +17,7 @@
 ///
 DynamicArray::DynamicArray()
 {
-	pData = NULL;
+	pData = nullptr;
 	BufferSize = 0;
 	Size = 0;
 }
@@ -28,7 +26,7 @@ DynamicArray::DynamicArray()
 ///
 /// Copy constructor
 ///
-DynamicArray::DynamicArray(DynamicArray const & other)
+DynamicArray::DynamicArray(const DynamicArray & other)
 {
 	CopyFrom(other);
 }
@@ -37,7 +35,7 @@ DynamicArray::DynamicArray(DynamicArray const & other)
 ///
 /// Assignment operator
 ///
-DynamicArray& DynamicArray::operator=(DynamicArray const & other)
+DynamicArray& DynamicArray::operator=(const DynamicArray & other)
 {
 	if(this != &other)
 	{
@@ -66,7 +64,7 @@ void DynamicArray::Clear()
 {
 	delete [] pData;
 
-	pData = NULL;
+	pData = nullptr;
 	BufferSize = 0;
 	Size = 0;
 }
@@ -198,7 +196,7 @@ void DynamicArray::Print() const
 /// It does not perform any actions to free resources.
 /// If necessary, call Clear() before CopyFrom().
 ///
-void DynamicArray::CopyFrom(DynamicArray const & other)
+void DynamicArray::CopyFrom(const DynamicArray & other)
 {
     pData = new int[other.BufferSize];
 

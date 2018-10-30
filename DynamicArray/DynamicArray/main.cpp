@@ -1,6 +1,6 @@
 ﻿/********************************************************************
  *
- * This file is part of the Data structures and algorithms in C++ examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples

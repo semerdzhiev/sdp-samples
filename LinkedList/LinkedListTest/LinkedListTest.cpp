@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -27,7 +27,7 @@ namespace LinkedListTest
 		///
 		bool ContainsRange(LinkedList<int>& list, int start, int end)
 		{
-			Iterator<int> it = list.GetIterator();
+			LinkedList<int>::Iterator it = list.GetIterator();
 
 			int i = start;
 
@@ -50,7 +50,7 @@ namespace LinkedListTest
 		void FillList(LinkedList<int>& list, int Start, int End)
 		{
 			for (int i = Start; i <= End; i++)
-				list.AddTail(i);
+				list.PushBack(i);
 		}
 
 
@@ -62,16 +62,22 @@ namespace LinkedListTest
 			LinkedList<int> list;
 
 			Assert::IsTrue(list.IsEmpty());
-			Assert::AreEqual(list.GetCount(), 0);
+			Assert::AreEqual(list.GetSize(), 0);
 
 			// The following operation should be working
-			list.RemoveAll();
-			list.RemoveHead();
-			list.RemoveTail();
+			list.Clear();
+			list.PopFront();
+			list.PopBack();
 
-			// Changing the head and tail should fail
-			Assert::IsFalse(list.SetHead(1000));
-			Assert::IsFalse(list.SetTail(1000));
+			// The following operatins should throw an exception
+            Assert::ExpectException<std::out_of_range>(
+                [&list]() { list.At(1); }
+            );
+
+            Assert::ExpectException<std::out_of_range>(
+                [&list]() { list.RemoveAt(1); }
+            );
+		
 		}
 
 
@@ -90,39 +96,40 @@ namespace LinkedListTest
 			// the heads can be retrieved.
 			for (int i = MAX_ELEM; i >= 0; i--)
 			{
-				Assert::IsTrue(newList.AddHead(i));
 
-				Assert::IsTrue(newList.GetCount() == (MAX_ELEM - i + 1));
+                newList.PushFront(i);
+
+				Assert::IsTrue(newList.GetSize() == (MAX_ELEM - i + 1));
 				Assert::IsFalse(newList.IsEmpty());
 
-				Assert::IsTrue(newList.GetHead() == i);
+				Assert::IsTrue(newList.Front() == i);
 			}
 
 			// Make sure that the elements are there
 			Assert::IsTrue(ContainsRange(newList, 0, MAX_ELEM));
 
 			// Try to change the head
-			Assert::IsTrue(newList.SetHead(-100));
+			newList.Front() = -100;
 
-			Assert::IsTrue(newList.GetHead() == -100);
+			Assert::IsTrue(newList.Front() == -100);
 
-			Assert::IsTrue(newList.SetHead(0));
+            newList.Front() = 0;
 
-			Assert::IsTrue(newList.GetHead() == 0);
+			Assert::IsTrue(newList.Front() == 0);
 
-			// Now remove all heads one by one
+			// Now remove all items, one by one, from the front
 			for (int i = 0; i <= MAX_ELEM; i++)
 			{
-				Assert::IsTrue(newList.GetCount() == (MAX_ELEM - i + 1));
+				Assert::IsTrue(newList.GetSize() == (MAX_ELEM - i + 1));
 				Assert::IsFalse(newList.IsEmpty());
 
-				Assert::IsTrue(newList.GetHead() == i);
+				Assert::IsTrue(newList.Front() == i);
 
-				newList.RemoveHead();
+				newList.PopFront();
 			}
 
 			// Make sure the list is now empty
-			Assert::IsTrue(newList.GetCount() == 0);
+			Assert::IsTrue(newList.GetSize() == 0);
 			Assert::IsTrue(newList.IsEmpty());
 		}
 
@@ -137,7 +144,7 @@ namespace LinkedListTest
 			LinkedList<int> newList;
 
 			// Make sure the list is empty
-			Assert::IsTrue(newList.GetCount() == 0);
+			Assert::IsTrue(newList.GetSize() == 0);
 			Assert::IsTrue(newList.IsEmpty());
 
 			// Add the numbers between 0 and 10 and make sure
@@ -145,41 +152,57 @@ namespace LinkedListTest
 			// the heads can be retrieved.
 			for (int i = 0; i <= MAX_ELEM; i++)
 			{
-				Assert::IsTrue(newList.AddTail(i));
+				newList.PushBack(i);
 
-				Assert::IsTrue(newList.GetCount() == i + 1);
+				Assert::IsTrue(newList.GetSize() == i + 1);
 				Assert::IsFalse(newList.IsEmpty());
 
-				Assert::IsTrue(newList.GetTail() == i);
+				Assert::IsTrue(newList.Back() == i);
 			}
 
 			// Make sure that the elements are there
 			Assert::IsTrue(ContainsRange(newList, 0, MAX_ELEM));
 
-			// Try to change the head
-			Assert::IsTrue(newList.SetTail(-100));
+			// Try to change the tail
+			newList.Back() = -100;
 
-			Assert::IsTrue(newList.GetTail() == -100);
+			Assert::IsTrue(newList.Back() == -100);
 
-			Assert::IsTrue(newList.SetTail(MAX_ELEM));
+            newList.Back() = MAX_ELEM;
 
-			Assert::IsTrue(newList.GetTail() == MAX_ELEM);
+			Assert::IsTrue(newList.Back() == MAX_ELEM);
 
-			// Now remove all heads one by one
+            // Now remove all items, one by one, from the back
 			for (int i = MAX_ELEM; i >= 0; i--)
 			{
-				Assert::IsTrue(newList.GetCount() == (i + 1));
+				Assert::IsTrue(newList.GetSize() == (i + 1));
 				Assert::IsFalse(newList.IsEmpty());
 
-				Assert::IsTrue(newList.GetTail() == i);
+				Assert::IsTrue(newList.Back() == i);
 
-				newList.RemoveTail();
+				newList.PopBack();
 			}
 
 			// Make sure the list is now empty
-			Assert::IsTrue(newList.GetCount() == 0);
+			Assert::IsTrue(newList.GetSize() == 0);
 			Assert::IsTrue(newList.IsEmpty());
 		}
+
+        ///
+        ///	Test the clear operation
+        ///
+        TEST_METHOD(TestClear)
+        {
+            LinkedList<int> newList;
+
+            FillList(newList, 1, 10);
+
+            Assert::IsTrue(ContainsRange(newList, 1, 10));
+
+            newList.Clear();
+
+            Assert::IsTrue(newList.IsEmpty());
+        }
 
 
 		///
@@ -191,28 +214,14 @@ namespace LinkedListTest
 
 			LinkedList<int> newList;
 
-			// Insert Before on empty list
-			newList.InsertBefore(0, 3);
-			newList.InsertBefore(0, 2);
-			newList.InsertBefore(0, 1);
-
-			Assert::IsTrue(ContainsRange(newList, 1, 3));
-
-			// Insert After the head
-			newList.RemoveAll();
-
-			Assert::IsTrue(newList.IsEmpty());
-
-			newList.AddHead(1);
-			newList.InsertAfter(0, 3);
-			newList.InsertAfter(0, 2);
+            FillList(newList, 1, 3);
 
 			Assert::IsTrue(ContainsRange(newList, 1, 3));
 
 			// Change of elements
-			newList.SetAt(0, 10);
-			newList.SetAt(1, 11);
-			newList.SetAt(2, 12);
+			newList.At(0) = 10;
+			newList.At(1) = 11;
+			newList.At(2) = 12;
 
 			Assert::IsTrue(ContainsRange(newList, 10, 12));
 
@@ -225,17 +234,6 @@ namespace LinkedListTest
 
 			newList.RemoveAt(0);
 			Assert::IsTrue(newList.IsEmpty());
-
-			// Insert Before and after
-			newList.AddHead(5);
-			newList.AddHead(3);
-			newList.AddHead(1);
-
-			newList.InsertAfter(2, 6);
-			newList.InsertBefore(2, 4);
-			newList.InsertBefore(1, 2);
-
-			Assert::IsTrue(ContainsRange(newList, 1, 6));
 		}
 
 
@@ -251,34 +249,34 @@ namespace LinkedListTest
 
 			FillList(newList, 0, MAX_ELEM);
 
-			Iterator<int> iterator = newList.GetIterator();
+			LinkedList<int>::Iterator it = newList.GetIterator();
 
 			for (int i = 0; i <= MAX_ELEM; i++)
 			{
-				Assert::IsFalse(iterator.EndReached());
-				Assert::AreEqual(iterator.GetCurrent(), i);
-				iterator.MoveNext();
+				Assert::IsFalse(it.EndReached());
+				Assert::AreEqual(it.GetCurrent(), i);
+				it.MoveNext();
 			}
 
 			// Assert that the iterator is at its end
-			Assert::IsTrue(iterator.EndReached());
+			Assert::IsTrue(it.EndReached());
 
 			// Now rewind and try again
-			iterator.Rewind();
+			it.Rewind();
 
 			for (int i = 0; i <= MAX_ELEM; i++)
 			{
-				Assert::IsFalse(iterator.EndReached());
-				Assert::AreEqual(iterator.GetCurrent(), i);
-				iterator.MoveNext();
+				Assert::IsFalse(it.EndReached());
+				Assert::AreEqual(it.GetCurrent(), i);
+				it.MoveNext();
 			}
 
 			// Assert that the iterator is at its end
-			Assert::IsTrue(iterator.EndReached());
+			Assert::IsTrue(it.EndReached());
 
-			for (iterator.Rewind(); !iterator.EndReached(); iterator.MoveNext())
+			for (it.Rewind(); !it.EndReached(); it.MoveNext())
 			{
-				iterator.SetCurrent(iterator.GetCurrent() + 100);
+				it.SetCurrent(it.GetCurrent() + 100);
 			}
 
 			Assert::IsTrue(ContainsRange(newList, 100, 100 + MAX_ELEM));

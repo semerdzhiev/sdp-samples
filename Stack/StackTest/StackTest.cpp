@@ -1,11 +1,12 @@
 ﻿/********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
  *
  */
+
 
 #include "stdafx.h"
 #include "CppUnitTest.h"
@@ -19,7 +20,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace StackTest
 {
 	///
-	/// A pop on an emty stack should return false
+	/// A pop on an empty stack should return false
 	///
 	template <class T> void TestEmptyStack(T& stack)
 	{
@@ -29,10 +30,10 @@ namespace StackTest
 	}
 
 	///
-	/// Checks whether stack provides proper FILO operations:
+	/// Checks whether the stack provides proper FILO operations:
 	/// 1. The elements are popped in reverse of the push order
 	/// 2. The number of elements that can be popped is
-	/// the same as the number of pushed elements
+	///      the same as the number of pushed elements
 	/// 3. Peek works correctly after each push/pop
 	///
 	template <class T> void TestCorrectSequence(T& stack, size_t ElementsCount)

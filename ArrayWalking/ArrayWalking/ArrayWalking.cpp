@@ -1,3 +1,12 @@
+/********************************************************************
+ *
+ * This file is part of the Data structures and algorithms in C++ package
+ *
+ * Author: Atanas Semerdzhiev
+ * URL: https://github.com/semerdzhiev/sdp-samples
+ *
+ */
+
 #include <ctime>
 #include <iostream>
 
@@ -16,15 +25,13 @@ int main()
 	// Initialize the elements of the array
 	//
 	std::cout << "Initalizing the elements of the array...";
-
-	start = time(NULL);
+	start = std::time(NULL);
 
 	for (row = 0; row < RowsCount; ++row)
 		for (col = 0; col < ColsCount; ++col)
 			parr[ColsCount * row + col] = static_cast<int>(row);
 
-	end = time(NULL);
-
+	end = std::time(NULL);
 	std::cout << "\n    execution took " << end - start << " second(s)\n\n";
 
 
@@ -34,14 +41,13 @@ int main()
 	std::cout << "Iterating by columns and then rows...";
 
 	sum = 0;
-	start = time(NULL);
+	start = std::time(NULL);
 
 	for (col = 0; col < ColsCount; ++col)
 		for (row = 0; row < RowsCount; ++row)
 			sum += parr[ColsCount * row + col];
 
-	end = time(NULL);
-
+	end = std::time(NULL);
 	std::cout << "\n    execution took " << end - start << " second(s)\n    sum is " << sum << "\n\n";
 
 
@@ -51,16 +57,14 @@ int main()
 	std::cout << "Iterating by rows and then columns...";
 
 	sum = 0;
-	start = time(NULL);
+	start = std::time(NULL);
 
 	for (row = 0; row < RowsCount; ++row)
 		for (col = 0; col < ColsCount; ++col)
 			sum += parr[ColsCount * row + col];
 
-	end = time(NULL);
-
+	end = std::time(NULL);
 	std::cout << "\n    execution took " << end - start << " second(s)\n    sum is " << sum << "\n\n";
-
 
 	delete[] parr;
 
