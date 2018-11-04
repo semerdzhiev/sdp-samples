@@ -78,8 +78,8 @@ namespace LinkedListTest
         }
     };
 
-	TEST_CLASS(ListTest)
-	{
+    TEST_CLASS(ListTest)
+    {
     private:
         LinkedList<int> EmptyList;
         LinkedList<int> SampleList;
@@ -121,39 +121,39 @@ namespace LinkedListTest
         {
             Logger::WriteMessage(L"TestClassCleanup");
         }
-		
-		///
-		/// Checks whether list contains all integers in [start,end].
-		///
-		/// The integers should be stored in ascending order in the list.
-		///
-		bool ContainsRange(const LinkedList<int>& list, int start, int end)
-		{
-			LinkedList<int>::Iterator it = list.GetIterator();
+        
+        ///
+        /// Checks whether list contains all integers in [start,end].
+        ///
+        /// The integers should be stored in ascending order in the list.
+        ///
+        bool ContainsRange(const LinkedList<int>& list, int start, int end)
+        {
+            LinkedList<int>::Iterator it = list.GetIterator();
 
-			int i = start;
+            int i = start;
 
-			while (!it.EndReached() && i <= end)
-			{
-				if (it.GetCurrent() != i)
-					break;
+            while (!it.EndReached() && i <= end)
+            {
+                if (it.GetCurrent() != i)
+                    break;
 
-				i++;
-				it.MoveNext();
-			}
+                i++;
+                it.MoveNext();
+            }
 
-			return i > end;
-		}
+            return i > end;
+        }
 
 
-		///
-		///	Fills a list with all integers in the interval [Start, End].
-		///
-		void Fill(LinkedList<int>& list, int Start, int End)
-		{
-			for (int i = Start; i <= End; i++)
-				list.PushBack(i);
-		}
+        ///
+        ///    Fills a list with all integers in the interval [Start, End].
+        ///
+        void Fill(LinkedList<int>& list, int Start, int End)
+        {
+            for (int i = Start; i <= End; i++)
+                list.PushBack(i);
+        }
 
 
         ///
@@ -250,42 +250,42 @@ namespace LinkedListTest
             AssertContainsSampleRange(SampleList); // make sure the operation does not work on a memory of its own
         }
 
-		TEST_METHOD(HeadOperationsWorkCorrectly)
-		{
-			LinkedList<int> list;
+        TEST_METHOD(HeadOperationsWorkCorrectly)
+        {
+            LinkedList<int> list;
 
             //
             // Add the numbers in the sample range and make sure that each time:
-			// 1. the list size increases accordingly
+            // 1. the list size increases accordingly
             // 2. IsEmpty returns false
             // 3. The head can be retrieved
             // 4. The value of the head matches the value added
             //
             for (int i = SampleSize - 1; i >= 0; --i)
-			{
+            {
                 list.PushFront(SampleRangeStart + i);
 
-				Assert::AreEqual(list.Front(), SampleRangeStart + i);
+                Assert::AreEqual(list.Front(), SampleRangeStart + i);
                 AssertSize(list, SampleSize - i);
-				Assert::IsFalse(list.IsEmpty());
-			}
+                Assert::IsFalse(list.IsEmpty());
+            }
 
-			// Make sure that the elements are there
+            // Make sure that the elements are there
             AssertContainsSampleRange(list);
             AssertSize(list, SampleSize);
 
-			// Now remove all items, one by one, from the front
-			for (int i = 0; i < SampleSize; ++i)
-			{
+            // Now remove all items, one by one, from the front
+            for (int i = 0; i < SampleSize; ++i)
+            {
                 Assert::AreEqual(list.Front(), SampleRangeStart + i);
                 AssertSize(list, SampleSize - i);
                 Assert::IsFalse(list.IsEmpty());
 
-				list.PopFront();
-			}
+                list.PopFront();
+            }
 
             AssertEmpty(list);
-		}
+        }
 
         TEST_METHOD(Tail_CanActuallyModifyTheTail)
         {
@@ -302,11 +302,11 @@ namespace LinkedListTest
         }
 
 
-		///
-		///	Test tail operations
-		///
-		TEST_METHOD(TailOperationsWorkCorrectly)
-		{
+        ///
+        ///    Test tail operations
+        ///
+        TEST_METHOD(TailOperationsWorkCorrectly)
+        {
             LinkedList<int> list;
 
             //
@@ -340,13 +340,13 @@ namespace LinkedListTest
             }
 
             AssertEmpty(list);
-		}
+        }
 
-		///
-		///	Test at index operations
-		///
-		TEST_METHOD(At_ReturnsCorrectValues)
-		{
+        ///
+        ///    Test at index operations
+        ///
+        TEST_METHOD(At_ReturnsCorrectValues)
+        {
             const int TestSize = 5;
 
             LinkedList<int> list;
@@ -364,9 +364,9 @@ namespace LinkedListTest
                 );
         }
 
-		///
-		///	Test iterator functionality
-		///
+        ///
+        ///    Test iterator functionality
+        ///
         TEST_METHOD(Iterator_CanCorrectlyReadTheList)
         {
             LinkedList<int>::Iterator it = SampleList.GetIterator();
@@ -402,10 +402,10 @@ namespace LinkedListTest
         {
             LinkedList<int>::Iterator it = SampleList.GetIterator();
 
-			for (it.Rewind(); !it.EndReached(); it.MoveNext())
-				it.SetCurrent(it.GetCurrent() + 100);
+            for (it.Rewind(); !it.EndReached(); it.MoveNext())
+                it.SetCurrent(it.GetCurrent() + 100);
 
-			AssertContainsRange(SampleList, SampleRangeStart + 100, SampleRangeEnd + 100);
-		}
-	};
+            AssertContainsRange(SampleList, SampleRangeStart + 100, SampleRangeEnd + 100);
+        }
+    };
 }
