@@ -10,7 +10,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 
-#include "..\LinkedList\Box.h"
+#include "..\LinkedList\LinkedList.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -19,7 +19,7 @@ namespace LinkedListTest
 	TEST_CLASS(BoxTest)
 	{
 	public:
-		void TestSingleBox(Box<int>& box)
+		void TestSingleBox(LinkedList<int>::Box& box)
 		{
 			Assert::IsTrue(box.Data == 100, L"Data is not stored properly");
 			Assert::IsNull(box.pNext, L"pNext is not NULL on a single box");
@@ -28,15 +28,15 @@ namespace LinkedListTest
 
 		TEST_METHOD(TestSingleBox)
 		{
-			Box<int> box(100);
+            LinkedList<int>::Box box(100);
 
 			TestSingleBox(box);
 		}
 
 		TEST_METHOD(TestChain)
 		{
-			Box<int> boxEnd(100);
-			Box<int> boxStart(200, &boxEnd);
+            LinkedList<int>::Box boxEnd(100);
+            LinkedList<int>::Box boxStart(200, &boxEnd);
 
 			// Test whether adding a single box to a chain changes it
 			TestSingleBox(boxEnd);

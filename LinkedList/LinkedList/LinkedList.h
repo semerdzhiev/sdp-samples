@@ -16,7 +16,7 @@
 ///
 template <class T>
 class LinkedList {
-private:
+public:
     ///
     /// Represents one box in a linked list
     ///
@@ -38,7 +38,7 @@ private:
     };
 
 
-public:
+
     class Iterator {
     private:
         Box *pStart;   /// Pointer to the first box in the linked list
@@ -103,7 +103,7 @@ public:
 private:
     Box *pFirst; /// Pointer to the first box in the linked list
     Box *pLast;  /// Pointer to the last box in the linked list
-    int Size;    /// Number of elements in the linked list
+    size_t Size;    /// Number of elements in the linked list
 
 
 public:
@@ -166,7 +166,7 @@ public:
     ///
     /// Returns the number of elements in the list
     ///
-    int GetSize() const
+    size_t GetSize() const
     {
         return Size;
     }
@@ -198,11 +198,17 @@ public:
         Box *pNewChainStart, *pNewChainEnd;
         CloneChain(Other.pFirst, pNewChainStart, pNewChainEnd);
 
-        if (pNewChainStart)
-        {
-            this->pLast->pNext = pNewChainStart;
-            this->pLast = pNewChainEnd;
-        }
+        if (!pNewChainStart)
+            return false;
+
+        if (Size == 0)
+            pFirst = pNewChainStart;
+        else
+            pLast->pNext = pNewChainStart;
+
+        pLast = pNewChainEnd;            
+
+        Size += Other.Size;
 
         return pNewChainStart != nullptr;
     }
@@ -304,10 +310,7 @@ public:
 
     const T& Front() const
     {
-        if (Size == 0)
-            throw std::exception();
-
-        return pFirst->Data;
+        return const_cast<LinkedList<T>*>(this)->Front();
     }
 
     ///
@@ -325,10 +328,7 @@ public:
 
     const T& Back() const
     {
-        if (Size == 0)
-            throw std::exception();
-
-        return pLast->Data;
+        return const_cast<LinkedList<T>*>(this)->Back();
     }
 
     ///
