@@ -79,6 +79,7 @@
   <ItemGroup>
     <ClInclude Include="FixedSizeStack.h" />
     <ClInclude Include="LinkedStack.h" />
+    <ClInclude Include="StackAsAdapter.h" />
     <ClInclude Include="StaticStack.h" />
   </ItemGroup>
   <ItemGroup>

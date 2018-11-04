@@ -29,5 +29,8 @@
     <ClInclude Include="StaticStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StackAsAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

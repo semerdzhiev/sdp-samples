@@ -14,6 +14,7 @@
 #include "..\Stack\StaticStack.h"
 #include "..\Stack\FixedSizeStack.h"
 #include "..\Stack\LinkedStack.h"
+#include "..\Stack\StackAsAdapter.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -24,9 +25,11 @@ namespace StackTest
 	///
 	template <class T> void TestEmptyStack(T& stack)
 	{
-		double foo;
+		int foo;
 
 		Assert::IsFalse(stack.Pop(foo));
+        Assert::IsTrue(stack.IsEmpty());
+        Assert::AreEqual(stack.GetSize(), static_cast<size_t>(0));
 	}
 
 	///
@@ -38,13 +41,13 @@ namespace StackTest
 	///
 	template <class T> void TestCorrectSequence(T& stack, size_t ElementsCount)
 	{
-		double value, popped;
+		int value, popped;
 
 		// Push the specified number of elements
 		// and check Peek() and GetSize() on each step
 		for (size_t i = 1; i <= ElementsCount; i++)
 		{
-			value = static_cast<double>(i);
+			value = static_cast<int>(i);
 
 			stack.Push(value);
 
@@ -56,7 +59,7 @@ namespace StackTest
 		// GetSize() on each step
 		for (size_t j = ElementsCount; j > 0; j--)
 		{
-			value = static_cast<double>(j);
+			value = static_cast<int>(j);
 
 			Assert::AreEqual(stack.GetSize(), j, L"Size inconsistent before pop");
 			Assert::AreEqual(stack.Peek(), value, L"Peek inconsistent before pop");
@@ -75,32 +78,42 @@ namespace StackTest
 	public:
 		TEST_METHOD(StaticStack_EmptyStack)
 		{
-			TestEmptyStack(StaticStack<double, 10>());
+			TestEmptyStack(StaticStack<int, 10>());
 		}
 
 		TEST_METHOD(StaticStack_CorrectSequence)
 		{
-			TestCorrectSequence(StaticStack<double, 100>(), 100);
+			TestCorrectSequence(StaticStack<int, 100>(), 100);
 		}
 
 		TEST_METHOD(FixedSizeStack_EmptyStack)
 		{
-			TestEmptyStack(FixedSizeStack<double>(10));
+			TestEmptyStack(FixedSizeStack<int>(10));
 		}
 
 		TEST_METHOD(FixedSizeStack_CorrectSequence)
 		{
-			TestCorrectSequence(FixedSizeStack<double>(100), 100);
+			TestCorrectSequence(FixedSizeStack<int>(100), 100);
 		}
 
 		TEST_METHOD(LinkedStack_EmptyStack)
 		{
-			TestEmptyStack(LinkedStack<double>());
+			TestEmptyStack(LinkedStack<int>());
 		}
 
 		TEST_METHOD(LinkedStack_CorrectSequence)
 		{
-			TestCorrectSequence(LinkedStack<double>(), 100);
+			TestCorrectSequence(LinkedStack<int>(), 100);
 		}
+
+        TEST_METHOD(StackAsAdapter_EmptyStack)
+        {
+            TestEmptyStack(StackAsAdapter<int>());
+        }
+
+        TEST_METHOD(StackAsAdapter_CorrectSequence)
+        {
+            TestCorrectSequence(StackAsAdapter<int>(), 100);
+        }
 	};
 }
