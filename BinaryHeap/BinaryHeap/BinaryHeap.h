@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <set>
 #include <vector>
 #include <functional>
 
@@ -19,6 +20,18 @@ class BinaryHeap
     Compare comesBefore;           /// A predicate used to compare the elements of the heap
 
 public:
+
+    BinaryHeap() : BinaryHeap(Compare())
+    {}
+
+    BinaryHeap(Compare predicate) : comesBefore(predicate)
+    {}
+
+    BinaryHeap(const BinaryHeap&) = default;
+    BinaryHeap& operator=(const BinaryHeap&) = default;
+    BinaryHeap(BinaryHeap&&) = default;
+    BinaryHeap& operator=(BinaryHeap&&) = default;
+
     ///
     /// Add a new element to the heap
     ///
