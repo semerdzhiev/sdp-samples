@@ -21,11 +21,10 @@ class BinaryHeap
 
 public:
 
-    BinaryHeap() : BinaryHeap(Compare())
-    {}
+    BinaryHeap() = default;
 
     BinaryHeap(Compare predicate) : comesBefore(predicate)
-    {}
+    { /* Nothing to do here */ }
 
     BinaryHeap(const BinaryHeap&) = default;
     BinaryHeap& operator=(const BinaryHeap&) = default;
