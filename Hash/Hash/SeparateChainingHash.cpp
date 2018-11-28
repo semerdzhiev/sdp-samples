@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -12,11 +12,10 @@
 
 #include "SeparateChainingHash.h"
 
-SeparateChainingHashStl::SeparateChainingHashStl(HashingFunction* pHashingFunction, size_t ChainsCount) : Hash(pHashingFunction)
+SeparateChainingHashStl::SeparateChainingHashStl(HashingFunction* pHashingFunction, size_t ChainsCount)
+    : Hash(pHashingFunction), chainsCount(ChainsCount)
 {
-	pChains = new std::list<int>[ChainsCount];
-
-	this->ChainsCount = ChainsCount;
+	pChains = new std::list<int>[chainsCount];
 }
 
 SeparateChainingHashStl::~SeparateChainingHashStl()
@@ -37,14 +36,10 @@ bool SeparateChainingHashStl::Search(const int Value)
 {
 	int hash = pHashingFunction->CalculateHash(Value);
 
-	std::list<int>::iterator it;
-
-	for(it = pChains[hash].begin(); it != pChains[hash].end(); it++)
+	for(auto it = pChains[hash].cbegin(); it != pChains[hash].cend(); ++it)
 	{
 		if( *it == Value )
-		{
 			return true;
-		}
 	}
 
 	return false;
@@ -56,7 +51,7 @@ void SeparateChainingHashStl::PrintInfo() const
 	size_t sumOfSizes = pChains[0].size();
 	size_t minChainSize = pChains[0].size();
 
-	for(size_t i = 1; i < ChainsCount; i++)
+	for(size_t i = 1; i < chainsCount; i++)
 	{
 		size_t size = pChains[i].size();
 
@@ -71,7 +66,7 @@ void SeparateChainingHashStl::PrintInfo() const
 	
 	size_t memoryUsed =
 		sizeof(*this) +  // object size
-		sizeof(std::list<int>) * ChainsCount + // vector of lists
+		sizeof(std::list<int>) * chainsCount + // vector of lists
 		sumOfSizes * stlListNodeSize; // Nodes allocated by the lists
 
 	size_t dataSize = sumOfSizes * sizeof(int);
@@ -80,7 +75,7 @@ void SeparateChainingHashStl::PrintInfo() const
 	std::cout
 		<< "SeparateChainingHashStl stats:"
 		<< "\n   - Max chain size: " << maxChainSize
-		<< "\n   - Avg chain size: " << (sumOfSizes / ChainsCount)
+		<< "\n   - Avg chain size: " << (sumOfSizes / chainsCount)
 		<< "\n   - Min chain size: " << minChainSize
 		<< "\n   - std::list node size: " << stlListNodeSize;
 
@@ -88,21 +83,21 @@ void SeparateChainingHashStl::PrintInfo() const
 }
 
 
-SeparateChainingHash::SeparateChainingHash(HashingFunction* pHashingFunction, size_t ChainsCount) : Hash(pHashingFunction)
-{
-    pChains = new Box*[ChainsCount];
-    
-    for (size_t i = 0; i < ChainsCount; i++)
-        pChains[i] = NULL;
 
-    this->ChainsCount = ChainsCount;
+SeparateChainingHash::SeparateChainingHash(HashingFunction* pHashingFunction, size_t ChainsCount)
+    : Hash(pHashingFunction), chainsCount(ChainsCount)
+{
+    pChains = new Box*[chainsCount];
+    
+    for (size_t i = 0; i < chainsCount; i++)
+        pChains[i] = nullptr;
 }
 
 SeparateChainingHash::~SeparateChainingHash()
 {
-    Box *p;
+    Box *p = nullptr;
 
-    for (size_t i = 0; i < ChainsCount; i++)
+    for (size_t i = 0; i < chainsCount; i++)
     {
         while (pChains[i])
         {
@@ -139,7 +134,7 @@ bool SeparateChainingHash::Search(const int Value)
 
     while (p)
     {
-        if (p->Data == Value)
+        if (p->data == Value)
             return true;
 
         p = p->pNext;
@@ -154,7 +149,7 @@ void SeparateChainingHash::PrintInfo() const
     size_t sumOfSizes = maxChainSize;
     size_t minChainSize = maxChainSize;
 
-    for (size_t i = 1; i < ChainsCount; i++)
+    for (size_t i = 1; i < chainsCount; i++)
     {
         size_t size = GetChainSize(pChains[i]);
 
@@ -165,7 +160,7 @@ void SeparateChainingHash::PrintInfo() const
 
     size_t memoryUsed =
         sizeof(*this) +  // object size
-        sizeof(Box*) * ChainsCount + // vector of lists
+        sizeof(Box*) * chainsCount + // vector of lists
         sumOfSizes * sizeof(Box); // Nodes allocated for the lists
 
     size_t dataSize = sumOfSizes * sizeof(int);
@@ -174,7 +169,7 @@ void SeparateChainingHash::PrintInfo() const
     std::cout
         << "SeparateChainingHashStl stats:"
         << "\n   - Max chain size: " << maxChainSize
-        << "\n   - Avg chain size: " << (sumOfSizes / ChainsCount)
+        << "\n   - Avg chain size: " << (sumOfSizes / chainsCount)
         << "\n   - Min chain size: " << minChainSize
         << "\n   - list node size: " << sizeof(Box);
 

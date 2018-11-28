@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -22,11 +22,9 @@
 template <class Container>
 bool NrhStl<Container>::Add(const int Value)
 {
-    Data.push_back(Value);
-
+    data.push_back(Value);
     return true;
 }
-
 
 
 ///
@@ -37,9 +35,7 @@ bool NrhStl<Container>::Add(const int Value)
 template <class Container>
 bool NrhStl<Container>::Search(const int Value)
 {
-    Container::iterator it;
-
-    for (it = Data.begin(); it != Data.end(); it++)
+    for (auto it = data.cbegin(); it != data.cend(); it++)
     {
         if (*it == Value)
             return true;
@@ -53,11 +49,11 @@ bool NrhStl<Container>::Search(const int Value)
 /// Print information
 ///
 template <class Container>
-void NrhStl< Container >::PrintInfo() const
+void NrhStl<Container>::PrintInfo() const
 {
     std::cout << "NrhStl:";
 
-    PrintCommonInfo(Data.size(), memoryUsed)
+    PrintCommonInfo(data.size(), memoryUsed);
 }
 
 
@@ -68,16 +64,16 @@ template <>
 void NrhStl< std::list<int> >::PrintInfo() const
 {
     // NOTE: Microsoft specific. Assumes we are storing int elements
-    // and  using the default allocator.
+    // and using the default allocator.
     static const size_t stlListNodeSize = sizeof(std::_List_node<int, void*>);
 
     size_t memoryUsed =
         sizeof(*this) +  // object size
-        Data.size() * stlListNodeSize; // nodes allocated by the list
+        data.size() * stlListNodeSize; // nodes allocated by the list
 
     std::cout << "NrhStl<std::list<>>:";
 
-    PrintCommonInfo(Data.size(), memoryUsed);
+    PrintCommonInfo(data.size(), memoryUsed);
 }
 
 
@@ -88,11 +84,11 @@ void NrhStl< std::list<int> >::PrintInfo() const
 template <>
 void NrhStl< std::vector<int> >::PrintInfo() const
 {
-    size_t memoryUsed = Data.capacity() * sizeof(int);
+    size_t memoryUsed = data.capacity() * sizeof(int);
 
     std::cout << "NrhStl<std::vector<>>:";
 
-    PrintCommonInfo(Data.size(), memoryUsed);
+    PrintCommonInfo(data.size(), memoryUsed);
 }
 
 
@@ -104,7 +100,7 @@ void NrhStl< std::vector<int> >::PrintInfo() const
 ///
 bool NrhVectorWithBinarySearch::Add(const int Value)
 {
-    Data.insert(std::upper_bound(Data.begin(), Data.end(), Value), Value);
+    data.insert(std::upper_bound(data.begin(), data.end(), Value), Value);
 
     return true;
 }
@@ -116,7 +112,7 @@ bool NrhVectorWithBinarySearch::Add(const int Value)
 ///
 bool NrhVectorWithBinarySearch::Search(const int Value)
 {
-    return std::binary_search(Data.begin(), Data.end(), Value);
+    return std::binary_search(data.begin(), data.end(), Value);
 }
 
 
@@ -126,11 +122,11 @@ bool NrhVectorWithBinarySearch::Search(const int Value)
 ///
 void NrhVectorWithBinarySearch::PrintInfo() const
 {
-    size_t memoryUsed = Data.capacity() * sizeof(int);
+    size_t memoryUsed = data.capacity() * sizeof(int);
 
     std::cout << "NrhVectorWithBinarySearch:";
 
-    PrintCommonInfo(Data.size(), memoryUsed);
+    PrintCommonInfo(data.size(), memoryUsed);
 }
 
 template class NrhStl< std::list<int> >;

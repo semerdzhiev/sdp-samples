@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -11,19 +11,14 @@
 
 #include "LinearProbingHash.h"
 
-LinearProbingHash::LinearProbingHash(HashingFunction* pHashingFunction, size_t MaxSize) : Hash(pHashingFunction)
+LinearProbingHash::LinearProbingHash(HashingFunction* pHashingFunction, size_t MaxSize)
+    : Hash(pHashingFunction), elementsCount(0), bufferSize(MaxSize*2)
 {
-	ElementsCount = 0;
-	
-	BufferSize = MaxSize * 2;
-
-	pBuffer = new int[BufferSize];
+	pBuffer = new int[bufferSize];
 
 	// Mark all positions as empty
-	for(size_t i = 0; i < BufferSize; i++)
-	{
+	for(size_t i = 0; i < bufferSize; i++)
 		pBuffer[i] = -1;
-	}
 }
 
 
@@ -35,19 +30,17 @@ LinearProbingHash::~LinearProbingHash()
 
 bool LinearProbingHash::Add(const int Value)
 {
-	if(ElementsCount >= BufferSize)
+	if(elementsCount >= bufferSize)
 		return false;
 
 	int i = pHashingFunction->CalculateHash(Value);
 
 	while(pBuffer[i] >= 0)
-	{
-		i = (i+1) % BufferSize;
-	}
+		i = (i+1) % bufferSize;
 
 	pBuffer[i] = Value;
 
-	ElementsCount++;
+	elementsCount++;
 
 	return true;
 }
@@ -61,7 +54,7 @@ bool LinearProbingHash::Search(const int Value)
 		if(pBuffer[i] == Value)
 			return true;
 		else
-			i = (i+1) % BufferSize;
+			i = (i+1) % bufferSize;
 	}
 
 	return false;
@@ -71,7 +64,7 @@ void LinearProbingHash::PrintInfo() const
 {
 	std::cout
 		<< "LinearProbingHash:"
-		<< "\n   - Used space: " << (((double)ElementsCount * 100) / BufferSize) << "%";
+		<< "\n   - Used space: " << (((double)elementsCount * 100) / bufferSize) << "%";
 
-	PrintCommonInfo(ElementsCount, BufferSize * sizeof(int) + sizeof(*this));
+	PrintCommonInfo(elementsCount, bufferSize * sizeof(int) + sizeof(*this));
 }

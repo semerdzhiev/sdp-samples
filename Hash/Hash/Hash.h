@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -17,9 +17,7 @@
 class HashingFunction
 {
 public:
-	virtual ~HashingFunction()
-	{
-	}
+    virtual ~HashingFunction() = default;
 
 	/// Calculates the hash of an int
 	virtual int CalculateHash(int Value) = 0;
@@ -33,19 +31,20 @@ public:
 ///
 class ModularHashingFunction : public HashingFunction
 {
+private:
+	int Mod;
+
 public:
 	ModularHashingFunction(int Mod)
+        : Mod(Mod)
 	{
-		this-> Mod = Mod;
+        // Nothing to do here
 	}
 
-	virtual int CalculateHash(int Value)
+	int CalculateHash(int Value) override
 	{
 		return Value % Mod;
 	}
-
-private:
-	int Mod;
 };
 
 
@@ -56,21 +55,21 @@ private:
 ///
 class ModAndMultiplyHashingFunction : public HashingFunction
 {
-public:
-    ModAndMultiplyHashingFunction(int Mod, int Multiplier)
-    {
-        this->Mod = Mod;
-        this->Multiplier = Multiplier;
-    }
-    
-    virtual int CalculateHash(int Value)
-    {
-        return (Value % Mod) * Multiplier;
-    }
-
 private:
     int Mod;
     int Multiplier;
+
+public:
+    ModAndMultiplyHashingFunction(int Mod, int Multiplier)
+        : Mod(Mod), Multiplier(Multiplier)
+    {
+        // Nothing to do here
+    }
+    
+    int CalculateHash(int Value) override
+    {
+        return (Value % Mod) * Multiplier;
+    }
 };
 
 
@@ -79,15 +78,17 @@ private:
 ///
 class Hash
 {
+protected:
+	HashingFunction * pHashingFunction;
+
 public:
-	Hash(HashingFunction* pHashingFunction = 0)
+	Hash(HashingFunction* pHashingFunction = nullptr)
+        : pHashingFunction(pHashingFunction)
 	{
-		this->pHashingFunction = pHashingFunction;
+		// Nothing to do here
 	}
 
-	virtual ~Hash()
-	{
-	}
+    virtual ~Hash() = default;
 
 	virtual bool Add(const int Value) = 0;
 	
@@ -108,7 +109,4 @@ public:
 			<< "\n   - Data vs Representation: " << data << "% data, " << (100 - data) << "% representation"
 			<< std::endl << std::endl;
 	}
-
-protected:
-	HashingFunction* pHashingFunction;
 };

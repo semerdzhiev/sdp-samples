@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -15,150 +15,131 @@
 #include "LinearProbingHash.h"
 
 
-///
-/// Sequentially fill pHash with all integers in [First, Last]
-///
-/// pszName is a string, which will be used as the name of the hash,
-/// when printing information to STDOUT.
-///
-void FillSequence(Hash* pHash, int First, int Last, const char* pszName)
+class HashBenchmark
 {
-    std::cout
-        << "Filling "
-        << pszName
-        << " with range ["
-        << First
-        << ", "
-        << Last
-        << "]...";
+    int elementsToFill;
+    int elementsToLookup;
+    int loopsCount;
 
-    time_t start = time(NULL);
+    ///
+    /// Sequentially fill a pHash with all integers in [0, elementsToFill]
+    ///
+    /// pszName is a string, which will be used as the name of the hash,
+    /// when printing information to STDOUT.
+    ///
+    /// \return
+    ///    Amount of time in seconds, it took to fill the hash
+    ///
+    time_t Fill(Hash& hash, const char* pszName) const
+    {
+        time_t start = time(nullptr);
 
-    for (int i = First; i < Last; i++)
-        pHash->Add(i);
+        for (int i = 0; i < elementsToFill; i++)
+        {
+            hash.Add(i);
+            //hash.Add(rand());
+        }
 
-    time_t end = time(NULL);
+        time_t end = time(nullptr);
 
-    std::cout << "completed in " << (end - start) << " second(s)\n";
-}
-
-
-///
-/// Tests the search performance of pHash
-///
-/// The function sequentially looks up all values in [First, Last].
-/// This is performed LoopsCount times.
-///
-/// pszName is a string, which will be used as the name of the hash,
-/// when printing information to STDOUT.
-///
-void TestSearch(Hash* pHash, int First, int Last, int LoopsCount, const char* pszName)
-{
-
-	std::cout << "Testing " << pszName << std::endl;
-	std::cout << "   Performing " << (LoopsCount * (Last - First)) << " searches...\n";
-
-    int hitCount = 0;
-    
-    time_t start = time(NULL);
-
-	for(int i = 0; i < LoopsCount; i ++)
-	{
-		for(int j = First ; j < Last; j++)
-		{
-			if(pHash->Search(j))
-				hitCount++;
-		}
-	}
-
-	time_t end = time(NULL);
-
-	std::cout << "   Execution took " << (end - start) << " second(s)\n";
-	std::cout << "   Found " << hitCount << " element(s)\n\n";
-
-}
+        return end - start;
+    }
 
 
+    ///
+    /// Tests the search performance of a hash
+    ///
+    /// The function sequentially looks up all values in [0, elementsToLookup].
+    /// This is performed loopsCount times.
+    ///
+    /// pszName is a string, which will be used as the name of the hash,
+    /// when printing information to STDOUT.
+    ///
+    time_t Lookup(Hash& hash, const char* pszName) const
+    {
+        int hitCount = 0;
 
+        time_t start = time(nullptr);
+
+        for (int i = 0; i < loopsCount; i++)
+        {
+            for (int j = 0; j < elementsToLookup; j++)
+            {
+                if (hash.Search(j))
+                    hitCount++;
+            }
+        }
+
+        time_t end = time(nullptr);
+
+        return end - start;
+    }
+
+public:
+    HashBenchmark(int elementsToFill, int loopsCount)
+        : elementsToFill(elementsToFill),
+          elementsToLookup(elementsToFill * 2), // half of the searches will be misses
+          loopsCount(loopsCount)
+    {
+        // Nothing to do here
+    }
+
+    void Process(Hash& hash, const char* name)
+    {
+        time_t f = Fill(hash, name);
+        time_t l = Lookup(hash, name);
+        
+        std::cout << name << " (" << f << "/" << l << ")\n\n";
+    }
+
+    void PrintInfo() const
+    {
+        std::cout << "\nBenchmark information:";
+        std::cout << "\n   Each hash will be filled with the integers in [0, " << elementsToFill << "]";
+        std::cout << "\n   Searching will perform " << elementsToLookup << " lookups";
+        std::cout << "\n   Data is printed in the following format: hash name (fill time/lookup time)";
+        std::cout << "\n\n";
+    }
+};
 
 
 int main()
 {
-    // Input benchmark parameters
-    int ElementsToFill = 0;
-    int LoopsCount = 0;
+    //std::cout.imbue(std::locale("en_US"));
 
+    int elementsToFill = 0; // Number of elements to fill in each hash
+    int loopsCount = 1;     // How many times to repeat each operation
+       
     std::cout << "How many elements to use: ";
-    std::cin >> ElementsToFill;
+    std::cin >> elementsToFill;
 
-    std::cout << "How many search loops to execute: ";
-    std::cin >> LoopsCount;
+    int low = elementsToFill / 20; // 5% of sample size
+    int high = elementsToFill / 2; // 50% of sample size
+    std::cout << "Using " << low << "/" << high << " chains\n";
 
-    int ElementsToLookup = ElementsToFill * 2;
-    
-    std::cout
-        << "Testing with " << ElementsToLookup << " elements per loop ("
-        << ((ElementsToFill * 100) / (ElementsToLookup + ElementsToFill))
-        << "% hits and "
-        << ((ElementsToLookup * 100) / (ElementsToLookup + ElementsToFill))
-        << "% misses)\n\n";
+    HashBenchmark test(elementsToFill, loopsCount);
+    test.PrintInfo();
 
-
-    // Create hash and hashing function objects
-    NrhStl<std::list<int>> nrhList;
-    NrhStl<std::vector<int>> nrhVector;
-    NrhVectorWithBinarySearch nrhBinarySearch;
-
-    ModularHashingFunction hashingFunctionA(7);
-	ModularHashingFunction hashingFunctionB(1597);
+    ModularHashingFunction modLow(low);
+	ModularHashingFunction modHigh(high);
     
     // These two functions scatter the hash values and are better suited for the Linear Probing hashes
-    ModAndMultiplyHashingFunction hashingFunctionC(7, (ElementsToFill * 2 ) / 7);
-    ModAndMultiplyHashingFunction hashingFunctionD(1000, (ElementsToFill * 2) / 1000);
-	
-    SeparateChainingHashStl schStlA(&hashingFunctionA, 7);
-    SeparateChainingHashStl schStlB(&hashingFunctionB, 1597);
-    SeparateChainingHash schA(&hashingFunctionA, 7);
-	SeparateChainingHash schB(&hashingFunctionB, 1597);
+    ModAndMultiplyHashingFunction spreadLow(low, (elementsToFill * 2 ) / low);
+    ModAndMultiplyHashingFunction spreadHigh(high, (elementsToFill * 2) / high);
 
-	LinearProbingHash lphA(&hashingFunctionA, ElementsToFill);
-	LinearProbingHash lphB(&hashingFunctionB, ElementsToFill);
-    LinearProbingHash lphC(&hashingFunctionC, ElementsToFill);
-    LinearProbingHash lphD(&hashingFunctionD, ElementsToFill);
-
-
-	// Fill the hashes with data
-    FillSequence(&nrhList, 0, ElementsToFill, "NrhStl<std::list>");
-    FillSequence(&nrhVector, 0, ElementsToFill, "NrhStl<std::vector>");
-    FillSequence(&nrhBinarySearch, 0, ElementsToFill, "NrhVectorWithBinarySearch");
+    test.Process(NrhStl<std::list<int>>(), "NrhStl<std::list>");
+    test.Process(NrhStl<std::vector<int>>(), "NrhStl<std::vector>");
+    test.Process(NrhVectorWithBinarySearch(), "NrhVectorWithBinarySearch");
     
-    FillSequence(&schA, 0, ElementsToFill, "SeparateChainingHash with 7 chains");
-    FillSequence(&schB, 0, ElementsToFill, "SeparateChainingHash with 1597 chains");
-    FillSequence(&schStlA, 0, ElementsToFill, "SeparateChainingHashStl with 7 chains");
-    FillSequence(&schStlB, 0, ElementsToFill, "SeparateChainingHashStl with 1597 chains");
+    test.Process(SeparateChainingHashStl(&modLow, low),    "SeparateChainingHashStl w/ modLow");
+    test.Process(SeparateChainingHashStl(&modHigh, high), "SeparateChainingHashStl w/ modHigh");
+    test.Process(SeparateChainingHash(&modLow, low),       "SeparateChainingHash w/ modLow");
+    test.Process(SeparateChainingHash(&modHigh, high),    "SeparateChainingHash w/ modHigh");
     
-    FillSequence(&lphA, 0, ElementsToFill, "LinearProbingHash with hashing function mod 7");
-    FillSequence(&lphB, 0, ElementsToFill, "LinearProbingHash with hashing function mod 1597");
-    FillSequence(&lphC, 0, ElementsToFill, "LinearProbingHash with hashing function mod 7 *");
-    FillSequence(&lphD, 0, ElementsToFill, "LinearProbingHash with hashing function mod 1000 *");
-
-    std::cout << "\n";
-
-
-	// Test the search performance of hashes
-	TestSearch(&nrhList, 0, ElementsToLookup, LoopsCount, "NrhStl<std::list>");
-    TestSearch(&nrhVector, 0, ElementsToLookup, LoopsCount, "NrhStl<std::vector>");
-    TestSearch(&nrhBinarySearch, 0, ElementsToLookup, LoopsCount, "NrhVectorWithBinarySearch");
-
-    TestSearch(&schA, 0, ElementsToLookup, LoopsCount, "SeparateChainingHash with 7 chains");
-	TestSearch(&schB, 0, ElementsToLookup, LoopsCount, "SeparateChainingHash with 1597 chains");
-    TestSearch(&schStlA, 0, ElementsToLookup, LoopsCount, "SeparateChainingHashStl with 7 chains");
-    TestSearch(&schStlB, 0, ElementsToLookup, LoopsCount, "SeparateChainingHashStl with 1597 chains");
-
-    TestSearch(&lphA, 0, ElementsToLookup, LoopsCount,  "LinearProbingHash with hashing function mod 7");
-	TestSearch(&lphB, 0, ElementsToLookup, LoopsCount,  "LinearProbingHash with hashing function mod 1597");
-    TestSearch(&lphC, 0, ElementsToLookup, LoopsCount, "LinearProbingHash with hashing function mod 7 *");
-    TestSearch(&lphD, 0, ElementsToLookup, LoopsCount, "LinearProbingHash with hashing function mod 1597 *");
+    test.Process(LinearProbingHash(&modLow, elementsToFill), "LinearProbingHash /w modLow");
+    test.Process(LinearProbingHash(&modHigh, elementsToFill), "LinearProbingHash /w modHigh");
+    test.Process(LinearProbingHash(&spreadLow, elementsToFill), "LinearProbingHash /w spreadLow");
+    test.Process(LinearProbingHash(&spreadHigh, elementsToFill), "LinearProbingHash /w spreadHigh");
 
 	return 0;
 }

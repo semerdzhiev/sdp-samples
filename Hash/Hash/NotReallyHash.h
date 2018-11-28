@@ -1,6 +1,6 @@
 /********************************************************************
  *
- * This file is part of the Data Structures in C++ Course Examples package.
+ * This file is part of the Data structures and algorithms in C++ package
  *
  * Author: Atanas Semerdzhiev
  * URL: https://github.com/semerdzhiev/sdp-samples
@@ -27,13 +27,13 @@
 template <class Container>
 class NrhStl : public Hash
 {
-public:
-	virtual bool Add(const int Value);
-	virtual bool Search(const int Value);
-	virtual void PrintInfo() const;
-
 private:
-	Container Data;
+	Container data;
+
+public:
+	bool Add(const int Value) override;
+	bool Search(const int Value) override;
+	void PrintInfo() const override;
 };
 
 
@@ -44,11 +44,11 @@ private:
 ///
 class NrhVectorWithBinarySearch : public Hash
 {
-public:
-    virtual bool Add(const int Value);
-    virtual bool Search(const int Value);
-    virtual void PrintInfo() const;
-
 private:
-    std::vector<int> Data;
+    std::vector<int> data;
+
+public:
+    bool Add(const int Value) override;
+    bool Search(const int Value) override;
+    void PrintInfo() const override;
 };
